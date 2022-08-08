@@ -169,7 +169,7 @@ console.log('The magic happens on port ' + port);
 
       	console.log(error.raw.message);
 
-      	res.render("failure.ejs" , {data : error.raw.message , service : req.body.serviceIds});
+      	res.render("failure.ejs" , {data : error.raw.message , service : req.body.serviceIds,name : req.body.userName, email : req.body.emailData,id:req.body.userId,tokens:req.body.tokendata});
      };
 
 });

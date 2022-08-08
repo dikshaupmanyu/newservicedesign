@@ -46,17 +46,17 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">Enter Username</label>
-                                    <input type="text" class="form-control" id="uname">
-                                    <small class="form-text blue-clr">Check availability</small>
+                                    <input type="text" class="form-control" id="uname" required="required">
+                                    <!-- <small class="form-text blue-clr">Check availability</small> -->
                                 </div>
                                 <div class="form-group">
                                   <label for="passward">Create Password</label>
-                                  <input type="password" class="form-control" id="pswrd">
+                                  <input type="password" class="form-control" id="pswrd" required="required">
                                   <span class="small">Use 8 or more characters with a mix of letters, numbers and symbols. Must not contain your name or username.</small>
                                 </div>
                                 <div class="form-group">
                                     <label for="confirmpassward">Confirm Password</label>
-                                    <input type="password" class="form-control" id="cpswrd">
+                                    <input type="password" class="form-control" id="cpswrd" required="required">
                                 </div>
                                 <div class="form-group">
                                   <small class="mb-2 d-block">Please check the box below to proceed.</small>
@@ -121,7 +121,7 @@
   var formdata = {serviceSubscriptionPlanId : subsids};
    $.ajax({
         type: 'POST',
-        url: 'https://apistest.tradetipsapp.com/api/serviceMentorSubscriptionPlanWeb/getServiceSubscriptionPlanById',
+        url: 'https://apis.tradetipsapp.com/api/serviceMentorSubscriptionPlanWeb/getServiceSubscriptionPlanById',
         data: formdata,
         success: function(data) {
            var datak = JSON.stringify(data);
@@ -264,7 +264,7 @@ var pasWrdd = $('#pswrds').val();
 
       var conformPassword = $('#cpswrd').val();
       //  alert(conformPassword)
-      var urls = $('#url').val();
+      // var urls = $('#url').val();
       // alert(urls);
       if (userName == '' || email == '' || password == '' || conformPassword == '') {
         $(".successmsg2").html('<span>Please fill all the fields</span>');
@@ -279,7 +279,7 @@ var pasWrdd = $('#pswrds').val();
             if (password === conformPassword) {
               $.ajax({
                 type: 'POST',
-                url: 'https://apistest.tradetipsapp.com/api/appUser/newSignupPayment',
+                url: 'https://apis.tradetipsapp.com/api/appUser/newSignupPayment',
                 data: {
                   type: 4,
                   userName: userName,
@@ -292,6 +292,7 @@ var pasWrdd = $('#pswrds').val();
                 success: function (data) {
                   var datak = JSON.stringify(data);
                   var dataResultp = JSON.parse(datak);
+                  alert(dataResultp.message);
                   if (dataResultp.email) {
                     // alert('success')
                     $(".successmsg2").html(dataResultp.message);
@@ -306,7 +307,7 @@ var pasWrdd = $('#pswrds').val();
                     // alert('unsuccess')
                     $(".successmsg2").html(dataResultp.message);
                     setTimeout(function () { $(".successmsg2").empty() }, 2000);
-                    setTimeout(function () { $(window.location.reload()).empty() }, 2100);
+                    // setTimeout(function () { $(window.location.reload()).empty() }, 2100);
                   }
                   // }
                   //  var mentor = dataResult.isMentor        
@@ -319,7 +320,7 @@ var pasWrdd = $('#pswrds').val();
               //  alert('password nd conform password is not matching');
               $(".successmsg2").html('<span>Password and Confirm Password is not matching</span>');
               setTimeout(function () { $(".successmsg2").empty() }, 2000);
-              setTimeout(function () { $(window.location.reload()).empty() }, 2100);
+              // setTimeout(function () { $(window.location.reload()).empty() }, 2100);
             }
 
           }
