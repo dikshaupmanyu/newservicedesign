@@ -83,7 +83,7 @@
                 <h2 class="form-heading my-4 ">Enter Payment Information</h2>
                 <div class="row">
                     <div class="col-lg-7">
-                        <form>
+                        <form action="payment" method="POST" onSubmit="handleFormSubmit(this); return false;">
                             <div class="form-group form-row">
                               <label class="col-12" for="exampleInputEmail1">Enter Card No.</label>
                               <input type="text" class="form-control col-10" name="cardNumber" id="cardNumber"  placeholder="" onkeypress="return IsNumeric(event);" ondrop="return false;" onpaste="return false;"
@@ -114,7 +114,7 @@
                                 <p class="m-0 mx-2">Guarenteed safe & secure checkout</p>
                                 <img src="img/stript.svg" alt="stript">
                               </div>
-                            <a href="http://www.example.com/" class="btn btn-main d-block w-100 btn-blue">Pay Securely</a>
+                              <input type="submit" class="btn btn-main d-block w-100 btn-blue" value="Pay Securely">
                         </form>
                     </div>
                 </div>
