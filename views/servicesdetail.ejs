@@ -121,7 +121,7 @@
   var formdata = {serviceSubscriptionPlanId : subsids};
    $.ajax({
         type: 'POST',
-        url: 'https://apistest.tradetipsapp.com/api/serviceMentorSubscriptionPlanWeb/getServiceSubscriptionPlanById',
+        url: 'https://apis.tradetipsapp.com/api/serviceMentorSubscriptionPlanWeb/getServiceSubscriptionPlanById',
         data: formdata,
         success: function(data) {
            var datak = JSON.stringify(data);
@@ -279,7 +279,7 @@ var pasWrdd = $('#pswrds').val();
             if (password === conformPassword) {
               $.ajax({
                 type: 'POST',
-                url: 'https://apistest.tradetipsapp.com/api/appUser/newSignupPayment',
+                url: 'https://apis.tradetipsapp.com/api/appUser/newSignupPayment',
                 data: {
                   type: 4,
                   userName: userName,
