@@ -3,7 +3,7 @@
     margin:0;
 }
 .bg-grey{
-    background: #607d8b59;
+    background: #D2DDE0;
 }
 .btn-main{
     Padding:15px 40px 15px 40px;    
@@ -12,6 +12,22 @@
     line-height: 17px;
     letter-spacing: 0.02em;
     color: #FFFFFF;
+    transition: 0.2s ease-in-out;
+}
+header.header {
+    background: #fff;
+    padding: 16px 52px;
+}
+.btn-main.btn-black:hover,
+.btn-main.btn-dark:hover{
+    background: transparent;
+    border: 1px solid;
+    color: #060606;
+}
+.btn-main.btn-blue:hover{
+    background: transparent;
+    border: 1px solid;
+    color: #0F59CD;
 }
 .btn-main:hover{
     color: #fff;
@@ -27,6 +43,12 @@
 }
 .blue-clr{
     color: #0F59CD;
+}
+.green-clr{
+    color: #198754;
+}
+.form-text.green-clr{
+    font-weight: 500;
 }
 .card-padd{
     padding: 2rem;
@@ -45,13 +67,14 @@
 .form-group .small{
     font-size: 12px;
     font-weight: 500;
+    color: #939393;
 }
 .order-summery-section,
 .signup-section,
 .paymentsucessful-section,
 .paymentunsucssful-section,
 .login-section {
-    padding: 4rem 0 5.5rem;
+    padding: 4rem 0 4.5rem;
 }
 .newsletter-content{
     border-bottom: 1px solid #E3E3E3;
@@ -167,6 +190,7 @@
 }
 .product-text{
     margin-left: 16px;
+    font-weight: 500;
     color: #38383C;
 }
 .promo{
@@ -178,6 +202,9 @@
 .guranted{
     margin-bottom: 30px;
     margin-top: 30px;
+}
+.guranted p{
+    margin: 0;
 }
 .form-inline .form-control{
     height: 50px;
@@ -231,7 +258,7 @@
 }
 .what-next p{
     font-weight: 400;
-    font-size: 14px;
+    font-size: 15px;
     line-height: 135%;
     letter-spacing: 0.01em;
     color: #38383C;
@@ -250,9 +277,16 @@
 }
 .unsucssful img{
     margin-right: 24px;
+    width: 200px;
 }
 .signup-thank{
     padding-right: 70px;
+}
+.signup-thank p{
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 18px;
+    color: #38383C;
 }
 .order-summery-section .card,
 .login-section .card,
@@ -274,22 +308,35 @@
     top: 50%;
     background: #fff;
 }
-.card-img{
-    max-width: 13%;
+.card-img img{
+   padding-left: 10px;
+}
+.card form .form-text{
+    display: block;
+    font-size: 12px;
+    font-weight: 500;
+    margin-top: 1rem;
+    text-transform: capitalize;
 }
 @media (max-width:991px){
     .seprate-line{
-        border: none;
+        border-top: 1px solid #e3e3e3;
+        border-left: none;
         height: auto;
     }
     .or-logo{
-        display: none;
+        top: -19px;
+        left: 50%;
+        transform: translate(-50%);
+    }
+    .login-form {
+        padding-top: 3rem !important;
     }
 }
 
 @media (max-width:767px){
     .card-padd {
-        padding: 1rem;
+        padding: 1.5rem 1rem;
     }
     .what-next {
         margin-top: 5px;
@@ -317,6 +364,54 @@
     .subtotal .list-item {
         width: 100%;
         max-width: 100%;
+    }
+    .product-detail {
+        text-align: center;
+    }
+    .guranted {
+        margin-bottom: 24px;
+        margin-top: 24px;
+    }
+    .guranted p{
+        margin: 0 15px;
+        font-size: 14px;
+        line-height: 18px;
+    }
+    .order-summery-section,
+    .signup-section,
+    .paymentsucessful-section,
+    .paymentunsucssful-section,
+    .login-section {
+        padding: 4rem 0 3.5rem;
+    }
+    .edit-btn {
+        right: 15px;
+        top: 22px;
+    }
+    .form-heading {
+        font-size: 22px;
+    }
+    .card form .form-text {
+        margin-top: 0.5rem;
+    }
+    .card-img{
+        display: none;
+    }
+    .product-detail p {
+        margin: 13px 0 !important;
+    }   
+    .paymentsucessful-section .what-next{
+        margin-top: 25px;
+    }
+}
+
+@media (max-width:575px){
+    .apply-input{
+        width: 58%;
+    }
+    .apply-btn{
+        margin-left: 10px;
+        Padding: 15px 20px 15px 20px;
     }
 }
 
