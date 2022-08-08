@@ -76,18 +76,21 @@
                         <form>
                             <div class="form-group form-row">
                               <label class="col-12" for="exampleInputEmail1">Enter Card No.</label>
-                              <input type="text" class="form-control col-10"  placeholder="">
+                              <input type="text" class="form-control col-10" name="cardNumber" id="cardNumber"  placeholder="" onkeypress="return IsNumeric(event);" ondrop="return false;" onpaste="return false;"
+                              required="required">
                               <img class="col-2 card-img" src="img/card.svg" alt="img">
+                              <span id="error" style="color: Red; display: none">* Input digits (0 - 9)</span>
                             </div>
                             <div class="form-row align-items-center justify-content-between">
                                 <div class="form-group col-md-5">
                                   <label for="">Expiry Date.</label>
-                                  <input type="text" placeholder="MM/YY" class="form-control">
+                                  <input type="text" placeholder="MM/YY" class="form-control"  onkeyup="formatString(event);" name="monthYear"  maxlength="5">
                                 </div>
                                 <div class="form-group col-md-5 form-row">
                                     <label class="col-12" for="inputZip">CVV</label>
-                                    <input type="text" class="form-control col-md-8 col-10" >
+                                    <input type="text" class="form-control col-md-8 col-10"  name="cvv" id="cvv" required="required" maxlength="3" onkeypress="return IsNumerics(event);" ondrop="return false;">
                                     <img class="col-md-4 col-2" src="img/cvv.svg" alt="img">
+                                    <span id="errors" style="color: Red; display: none">* Input digits (0 - 9)</span>
                                 </div>
                               </div>
                                <div class="form-group">
@@ -111,6 +114,96 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 
+<script>
+  function cc_format(value) {
+    var v = value.replace(/\s+/g, "").replace(/[^0-9]/gi, "");
+    var matches = v.match(/\d{4,16}/g);
+    var match = (matches && matches[0]) || "";
+    var parts = [];
+    for (i = 0, len = match.length; i < len; i += 4) {
+      parts.push(match.substring(i, i + 4));
+    }
+    if (parts.length) {
+      return parts.join(" ");
+    } else {
+      return value;
+    }
+  }
+
+  onload = function () {
+    document.getElementById("cardNumber").oninput = function () {
+      this.value = cc_format(this.value);
+    };
+  };
+
+  var specialKeys = new Array();
+  specialKeys.push(8);
+  function IsNumeric(e) {
+    var keyCode = e.which ? e.which : e.keyCode;
+    var ret =
+      (keyCode >= 48 && keyCode <= 57) || specialKeys.indexOf(keyCode) != -1;
+    document.getElementById("error").style.display = ret ? "none" : "inline";
+    return ret;
+  }
+  function IsNumerics(e) {
+    var keyCode = e.which ? e.which : e.keyCode;
+    var ret =
+      (keyCode >= 48 && keyCode <= 57) || specialKeys.indexOf(keyCode) != -1;
+    document.getElementById("errors").style.display = ret ? "none" : "inline";
+    return ret;
+  }
+  function IsNumericpincode(e) {
+    var keyCode = e.which ? e.which : e.keyCode;
+    var ret =
+      (keyCode >= 48 && keyCode <= 57) || specialKeys.indexOf(keyCode) != -1;
+    document.getElementById("errorpincode").style.display = ret
+      ? "none"
+      : "inline";
+    return ret;
+  }
+</script>
+
+<!-- ///////////////////////  For Month and year -->
+<script>
+  function formatString(e) {
+    var inputChar = String.fromCharCode(event.keyCode);
+    var code = event.keyCode;
+    var allowedKeys = [8];
+    if (allowedKeys.indexOf(code) !== -1) {
+      return;
+    }
+
+    event.target.value = event.target.value
+      .replace(
+        /^([1-9]\/|[2-9])$/g,
+        "0$1/" // 3 > 03/
+      )
+      .replace(
+        /^(0[1-9]|1[0-2])$/g,
+        "$1/" // 11 > 11/
+      )
+      .replace(
+        /^([0-1])([3-9])$/g,
+        "0$1/$2" // 13 > 01/3
+      )
+      .replace(
+        /^(0?[1-9]|1[0-2])([0-9]{2})$/g,
+        "$1/$2" // 141 > 01/41
+      )
+      .replace(
+        /^([0]+)\/|[0]+$/g,
+        "0" // 0/ > 0 and 00 > 0
+      )
+      .replace(
+        /[^\d\/]|^[\/]*$/g,
+        "" // To allow only digits and `/`
+      )
+      .replace(
+        /\/\//g,
+        "/" // Prevent entering more than 1 `/`
+      );
+  }
+</script>
 <input type="text" class="form-control" id="serviceIdDetaildata" value="<%= serviceIdDetail %>" style="display: none;">
 
   <script type="text/javascript">  
