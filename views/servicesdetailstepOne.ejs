@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+   <input type="text" name="amount" id="prices" style="display: none" />
      <section class="login-section bg-grey">
          <div class="container">
             <div class="card card-padd shadow-sm rounded-card mb-3 mb-lg-4">
@@ -38,29 +39,34 @@
                     <div class="order-content">
                         <div class="order-product d-flex align-items-center justify-content-between">
                             <div class="product-detail">
-                                <img id="serviceImage" class="image-responsive" alt="product">
-                                <p class="product-text d-inline-block">Video Subscription 1-1 for 30 mins</p>
+                                <img src="img/product.png" alt="product">
+                                <p class="product-text d-inline-block" id="nameServiceorder"></p>
                             </div>
-                            <h4 class="product-price">$200.50</h4>
+                            <h4 class="product-price" id="priceServiceorder"></h4>
                         </div>
                     </div>
                    <h5 class="promo">Enter A Promo Code</h5>
                     <form class="form-inline">
-                        <input class="form-control mr-sm-2" type="text" placeholder="" aria-label="Search">
-                        <a href="http://www.example.com/" class="btn btn-main btn-blue my-2 my-sm-0">Apply</a>
+                      <input type="text" class="form-control mr-sm-2" name="text1" id="couponadd" placeholder="Enter Promo Code"
+                      style="margin-right: 10px" />
+                        <button class="btn btn-main btn-blue my-2 my-sm-0" type="button" id="stockadd"
+                      onclick="validate(document.getElementsByName('text1')[0].value)">Apply</button>
                     </form>
+
+                  <div class="successmsg3"></div>
+
                     <div class="subtotal d-flex align-items-end justify-content-end flex-column mt-3">
                         <div class="list-item">
                             <p>Subtotal</p>
-                            <span>$200.50</span>
+                            <span id="priceServiceordertotal"></span>
                         </div>
                         <div class="list-item">
                             <p>Discount</p>
-                            <span>$15.50</span>
+                            <span id="discountorderservice">$0</span>
                         </div>
                         <div class="list-item">
                             <p><b>Total</b></p>
-                            <span><b>$200.50</b></span>
+                            <span><b id="priceServices"></b></span>
                         </div>  
                     </div>
                 </div>
@@ -126,6 +132,7 @@
           str = str.split("_")[0];
           document.getElementById("typeService").innerHTML = dataResultp.serviceTypeMaster.description;
           document.getElementById("nameService").innerHTML = dataResultp.title;
+          document.getElementById("nameServiceorder").innerHTML = dataResultp.title;
           document.getElementById("shortDescriptionService").innerHTML = dataResultp.descriptionOne;
           // document.getElementById("longDescriptionService").innerHTML = dataResultp.descriptionTwo;
           document.getElementById("mentorNameService").innerHTML = "By " + str;
@@ -143,12 +150,14 @@
               document.getElementById("frequncyService").innerHTML = "Yearly Subscription : ";
           }
           document.getElementById("priceService").innerHTML = "$" + parseFloat(dataResultp.price).toFixed(2);
+          document.getElementById("priceServiceorder").innerHTML = "$" + parseFloat(dataResultp.price).toFixed(2);
+          document.getElementById("priceServiceordertotal").innerHTML = "$" + parseFloat(dataResultp.price).toFixed(2);
+          document.getElementById("prices").value = dataResultp.price * 100;
+          document.getElementById("priceServices").innerHTML = "$" + parseFloat(dataResultp.price).toFixed(2);
+
+
           // document.getElementById("priceServicess").innerHTML ="$" + parseFloat(dataResultp.price).toFixed(2);
-          if(dataResultp.imageDetails == null){
-              document.getElementById("serviceImage").src = dataResultp.thumbnailImageUrl;
-          }else{
-               document.getElementById("serviceImage").src = "https://apis.tradetipsapp.com" + dataResultp.imageDetails;
-          }
+         
         
 
 
@@ -156,6 +165,60 @@
 
 }
 });
+
+   //////////////////////////coupon code validation /////////////////////////////////////////////
+
+    var count = 0;
+
+  function validate(coupon) {
+    
+    var formdata = { couponId: coupon };
+
+    $.ajax({
+      type: "POST",
+      url: "https://apis.tradetipsapp.com/api/stripePayment/validateCoupon",
+      data: formdata,
+      success: function (data, textStatus, jqXHR) {
+        var finalpvals = data.percent_off;
+        var pricess = $("#prices").val();
+        var fdiscount = (pricess * finalpvals) / 100;
+        if (data.valid == true) {
+          count++;
+          if (count == 1) {
+            var Damount = pricess - fdiscount;
+            document.getElementById("prices").value = fdiscount;
+
+            $(".successmsg3").html(" Discount applied. Please continue your purchase.");
+
+            setTimeout(function () {
+              $(".successmsg3").empty();
+            }, 1200000);
+
+            document.getElementById("discountorderservice").innerHTML = `<span>${"$" + (fdiscount / 100).toString().match(/^-?\d+(?:\.\d{0,2})?/)[0]} </span>`;
+
+            document.getElementById("priceServices").innerHTML = "$" + parseFloat(
+              Damount / 100
+            ).toFixed(2);
+          } else {
+            $(".successmsg3").html(
+              "Sorry, You can apply coupan code only once"
+            );
+            setTimeout(function () {
+              $(".successmsg3").empty();
+            }, 3000);
+          }
+        }
+      },
+      error: function (errMsg) {
+        $(".successmsg3").html(
+          "Sorry, The Coupon Code you entered is invalid. Please check and try again!"
+        );
+        setTimeout(function () {
+          $(".successmsg3").empty();
+        }, 3000);
+      },
+    });
+  }
 
   
   </script>
