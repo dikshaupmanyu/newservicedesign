@@ -125,7 +125,7 @@
   var formdata = {serviceSubscriptionPlanId : subsids};
    $.ajax({
         type: 'POST',
-        url: 'https://apistest.tradetipsapp.com/api/serviceMentorSubscriptionPlanWeb/getServiceSubscriptionPlanById',
+        url: 'https://apis.tradetipsapp.com/api/serviceMentorSubscriptionPlanWeb/getServiceSubscriptionPlanById',
         data: formdata,
         success: function(data) {
            var datak = JSON.stringify(data);
