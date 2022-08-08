@@ -9,6 +9,12 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+    <input type="text" name="amount" id="prices" style="display: none" />
+    <header class="header">
+     <div class="container-fluid">
+         <img class="img-fluid" src="img/tradetiplogo.svg" alt="logo">
+     </div>
+ </header>
      <section class="signup-section bg-grey">
          <div class="container">
             <div class="card card-padd shadow-sm rounded-card mb-3 mb-lg-4">
@@ -26,12 +32,12 @@
             </div>
             <div class="card card-padd shadow-sm rounded-card mb-3 mb-lg-4 position-relative">
                  <div class="signup-thank mb-3 mb-lg-4">
-                    <h2 class="form-heading">Thank you for signing up for this service, MrShwers1!</h2>
-                    <p class="m-0">Remember your username <b>MrShwers1</b> and password.</p>
+                    <h2 class="form-heading">Thank you for signing up for this service, <%= name %>!</h2>
+                    <p class="m-0">Remember your username <b><%= name %></b> and password.</p>
                  </div>
                  <div class="what-next">
                     <h2 class="form-heading">What’s Next?</h2>
-                    <p class="m-0">Once you complete payment below, look out for a <b>Getting Started email</b> from us at <b>mrsharwes@gmail.com</b>
+                    <p class="m-0">Once you complete payment below, look out for a <b>Getting Started email</b> from us at <b><%= email %></b>
                         Use your username and password to log into the TradeTips app. Download it from your app store. </p>
                  </div>
                  <a class="btn btn-dark edit-btn" href="http://www.example.com/">Edit</a>
@@ -119,7 +125,7 @@
   var formdata = {serviceSubscriptionPlanId : subsids};
    $.ajax({
         type: 'POST',
-        url: 'https://apis.tradetipsapp.com/api/serviceMentorSubscriptionPlanWeb/getServiceSubscriptionPlanById',
+        url: 'https://apistest.tradetipsapp.com/api/serviceMentorSubscriptionPlanWeb/getServiceSubscriptionPlanById',
         data: formdata,
         success: function(data) {
            var datak = JSON.stringify(data);

@@ -7,8 +7,16 @@
     <title>TradeTips</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
     <link rel="stylesheet" href="css/style.css">
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+
 </head>
 <body>
+  <input type="text" name="amount" id="prices" style="display: none" />
+  <header class="header">
+   <div class="container-fluid">
+       <img class="img-fluid" src="img/tradetiplogo.svg" alt="logo">
+   </div>
+</header>
      <section class="order-summery-section bg-grey">
          <div class="container">
             <div class="card card-padd shadow-sm rounded-card mb-3 mb-lg-4">
@@ -29,7 +37,8 @@
                     <div class="col-lg-6">
                         <div class="signup padd_x20">
                             <h2 class="form-heading">Sign up for this Service</h2>
-
+                            <div class="successmsg2" style="text-align: center;"></div>
+                            <br>
                             <form method="POST">
                                 <div class="form-group">
                                   <label for="exampleInputEmail1">Enter Email Where We Can Contact You</label>
@@ -51,12 +60,22 @@
                                 </div>
                                 <div class="form-group">
                                   <small class="mb-2 d-block">Please check the box below to proceed.</small>
-                                  <img class="img-fluid d-block" src="img/rebot.png" alt="robot">
+                                  <!-- <img class="img-fluid d-block" src="img/rebot.png" alt="robot">
+                                   -->
+                                   <!-- <form action="#" id="my_captcha_form"> -->
+                                    <div class="g-recaptcha" 
+                                data-sitekey="6LfrFKQUAAAAAMzFobDZ7ZWy982lDxeps8cd1I2i" 
+                                ></div>
+                                    <!-- <p>
+                                    <button type="submit" >Submit</button>
+                                    </p> -->
+                                  <!-- </form> -->
                                 </div>
                                 <div class="terms-condition">
                                     <p>By signing up, you agree to the TradeTips Terms & Conditions.</p>
                                 </div>
-                                <a href="http://www.example.com/" class="btn btn-main btn-black d-block w-100">Create & Continue</a>
+                                <!-- <a href="http://www.example.com/" class="btn btn-main btn-black d-block w-100">Create & Continue</a> -->
+                                <button class="btn btn-main btn-black d-block w-100" id="formRegister" type="button" >Create & Continue</button>
                               </form>
                         </div>
                     </div>
@@ -102,7 +121,7 @@
   var formdata = {serviceSubscriptionPlanId : subsids};
    $.ajax({
         type: 'POST',
-        url: 'https://apis.tradetipsapp.com/api/serviceMentorSubscriptionPlanWeb/getServiceSubscriptionPlanById',
+        url: 'https://apistest.tradetipsapp.com/api/serviceMentorSubscriptionPlanWeb/getServiceSubscriptionPlanById',
         data: formdata,
         success: function(data) {
            var datak = JSON.stringify(data);
@@ -217,6 +236,100 @@ var pasWrdd = $('#pswrds').val();
 });
 
 });
+
+</script>
+
+
+
+<script type="text/javascript">
+
+  window.history.forward();
+  function noBack() {
+    window.history.forward();
+  }
+
+  window.addEventListener("load", function () {
+    var url_string = window.location.href;
+    var urls = new URL(url_string);
+    //  alert(url_string);
+    var subsids = "<%= serviceIdDetail %>";
+    $('#formRegister').on('click', function () {
+
+     
+      //  alert("hii");
+      var userName = $('#uname').val();
+      var email = $('#email').val();
+      //  alert(userName)
+      var password = $('#pswrd').val();
+
+      var conformPassword = $('#cpswrd').val();
+      //  alert(conformPassword)
+      var urls = $('#url').val();
+      // alert(urls);
+      if (userName == '' || email == '' || password == '' || conformPassword == '') {
+        $(".successmsg2").html('<span>Please fill all the fields</span>');
+        setTimeout(function () { $(".successmsg2").empty() }, 2000);
+      } else {
+        var response = grecaptcha.getResponse();
+          if(response.length == 0) 
+          { 
+            // alert('please verify you are humann!')
+            $(".successmsg2").html('please verify you are humann!');
+          }else{
+            if (password === conformPassword) {
+              $.ajax({
+                type: 'POST',
+                url: 'https://apistest.tradetipsapp.com/api/appUser/newSignupPayment',
+                data: {
+                  type: 4,
+                  userName: userName,
+                  email: email,
+                  password: password,
+                  conformPassword: conformPassword,
+                },
+                dataType: 'json',
+                cache: false,
+                success: function (data) {
+                  var datak = JSON.stringify(data);
+                  var dataResultp = JSON.parse(datak);
+                  if (dataResultp.email) {
+                    // alert('success')
+                    $(".successmsg2").html(dataResultp.message);
+                    setTimeout(function () { $(".successmsg2").empty() }, 3000);
+    
+                    setTimeout(function () {
+                      
+                      window.location.href = "/servicesdetailstepSignUp?id=" + subsids + "&logindetail=" + JSON.stringify(dataResultp);
+                    }, 2000);
+                  }
+                  else {
+                    // alert('unsuccess')
+                    $(".successmsg2").html(dataResultp.message);
+                    setTimeout(function () { $(".successmsg2").empty() }, 2000);
+                    setTimeout(function () { $(window.location.reload()).empty() }, 2100);
+                  }
+                  // }
+                  //  var mentor = dataResult.isMentor        
+                  // alert(mentor); 
+                  // alert(dataResult.accessToken)
+    
+                }
+              });
+            } else {
+              //  alert('password nd conform password is not matching');
+              $(".successmsg2").html('<span>Password and Confirm Password is not matching</span>');
+              setTimeout(function () { $(".successmsg2").empty() }, 2000);
+              setTimeout(function () { $(window.location.reload()).empty() }, 2100);
+            }
+
+          }
+
+      }
+    });
+
+  });
+
+
 
 </script>
 
