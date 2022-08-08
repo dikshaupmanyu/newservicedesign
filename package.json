@@ -1,0 +1,23 @@
+{
+  "name": "servicecode",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "compression": "^1.7.4",
+    "cors": "^2.8.5",
+    "ejs": "^3.1.8",
+    "express": "^3.21.2",
+    "express-jwt": "^7.7.5",
+    "fs": "^0.0.1-security",
+    "morgan": "^1.10.0",
+    "request": "^2.88.2",
+    "stripe": "^9.10.0"
+  }
+}

@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TradeTips</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+     <section class="order-summery-section bg-grey">
+         <div class="container">
+            <div class="card card-padd shadow-sm rounded-card mb-3 mb-lg-4">
+                <div class="newsletter-content padd_x20">
+                     <span class="newsletter" id="typeService"></span>
+                     <h2 id="nameService"></h2>
+                     <p id="shortDescriptionService"></p>
+                    <span class="news-client" id="mentorNameService"></span>
+                </div>
+                <div class="subscription d-flex align-items-center">
+                    <img src="img/dollar.svg" alt="dollar-icon">
+                    <h3 class="sub-name" id="frequncyService"></h3>
+                    <h3 class="sub-price" id="priceService"></h3>
+                </div>
+            </div>
+            <div class="card card-padd shadow-sm rounded-card mb-3 mb-lg-4">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="signup padd_x20">
+                            <h2 class="form-heading">Sign up for this Service</h2>
+
+                            <form method="POST">
+                                <div class="form-group">
+                                  <label for="exampleInputEmail1">Enter Email Where We Can Contact You</label>
+                                  <input type="email" class="form-control" id="email">
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">Enter Username</label>
+                                    <input type="text" class="form-control" id="uname">
+                                    <small class="form-text blue-clr">Check availability</small>
+                                </div>
+                                <div class="form-group">
+                                  <label for="passward">Create Password</label>
+                                  <input type="password" class="form-control" id="pswrd">
+                                  <span class="small">Use 8 or more characters with a mix of letters, numbers and symbols. Must not contain your name or username.</small>
+                                </div>
+                                <div class="form-group">
+                                    <label for="confirmpassward">Confirm Password</label>
+                                    <input type="password" class="form-control" id="cpswrd">
+                                </div>
+                                <div class="form-group">
+                                  <small class="mb-2 d-block">Please check the box below to proceed.</small>
+                                  <img class="img-fluid d-block" src="img/rebot.png" alt="robot">
+                                </div>
+                                <div class="terms-condition">
+                                    <p>By signing up, you agree to the TradeTips Terms & Conditions.</p>
+                                </div>
+                                <a href="http://www.example.com/" class="btn btn-main btn-black d-block w-100">Create & Continue</a>
+                              </form>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 mt-4 mt-lg-0 seprate-line">
+                        <div class="login-form padd_x20">
+                            <h2 class="form-heading">Have a TradeTips Account?  Log in</h2>
+                               <div class="successmsg1" style="text-align: center;"></div>
+                               <br>
+                            <form id="formoid" method="post" onsubmit="return false">
+                                <div class="form-group">
+                                  <label>Enter Username</label>
+                                  <input type="text" id="unames" name="userName" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                  <label>Enter Password</label>
+                                  <input type="password" id="pswrds" name="password" class="form-control" >
+                                </div>
+                                <a class="forgot-pass" href="#">Forget Password?</a>
+                                <button class="btn btn-main btn-blue d-block w-100" type="submit">Submit</button>
+                              </form>
+                        </div>
+                        <span class="or-logo">or</span>
+                    </div>
+                </div>
+            </div>
+            <div class="card card-padd shadow-sm rounded-card mb-3 mb-lg-4">
+                <h2 class="form-heading m-0 padd_x20">Order Summary</h2>
+            </div>
+         </div>
+     </section>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+<input type="text" class="form-control" id="serviceIdDetaildata" value="<%= serviceIdDetail %>" style="display: none;">
+
+  <script type="text/javascript">  
+  
+  var subsids = "<%= serviceIdDetail %>";
+  // alert(subsids);
+
+  var formdata = {serviceSubscriptionPlanId : subsids};
+   $.ajax({
+        type: 'POST',
+        url: 'https://apis.tradetipsapp.com/api/serviceMentorSubscriptionPlanWeb/getServiceSubscriptionPlanById',
+        data: formdata,
+        success: function(data) {
+           var datak = JSON.stringify(data);
+          // alert(datak);
+          var dataResultp = JSON.parse(datak); 
+          // alert(JSON.stringify(dataResultp));
+          let str = dataResultp.stripeProductName;
+          str = str.split("_")[0];
+          document.getElementById("typeService").innerHTML = dataResultp.serviceTypeMaster.description;
+          document.getElementById("nameService").innerHTML = dataResultp.title;
+          document.getElementById("shortDescriptionService").innerHTML = dataResultp.descriptionOne;
+          // document.getElementById("longDescriptionService").innerHTML = dataResultp.descriptionTwo;
+          document.getElementById("mentorNameService").innerHTML = "By " + str;
+          if(dataResultp.frequency == "0"){
+               document.getElementById("frequncyService").innerHTML = "One Time Subscription : " ;
+          }else if(dataResultp.frequency == "1"){ 
+                document.getElementById("frequncyService").innerHTML = "Daily Subscription : ";
+          }else if(dataResultp.frequency == "7"){
+              document.getElementById("frequncyService").innerHTML = "Weekly Subscription : ";
+          }else if(dataResultp.frequency == "15"){
+              document.getElementById("frequncyService").innerHTML = "Bi-weekly Subscription : ";
+          }else if(dataResultp.frequency == "30"){
+              document.getElementById("frequncyService").innerHTML = "Monthly Subscription : ";
+          }else {
+              document.getElementById("frequncyService").innerHTML = "Yearly Subscription : ";
+          }
+          document.getElementById("priceService").innerHTML = "$" + parseFloat(dataResultp.price).toFixed(2);
+          // document.getElementById("priceServicess").innerHTML ="$" + parseFloat(dataResultp.price).toFixed(2);
+          // if(dataResultp.imageDetails == null){
+          //     document.getElementById("serviceImage").src = dataResultp.thumbnailImageUrl;
+          // }else{
+          //      document.getElementById("serviceImage").src = "https://apis.tradetipsapp.com" + dataResultp.imageDetails;
+          // }
+        
+
+
+
+
+}
+});
+
+  
+  </script>
+<script type="text/javascript">
+
+const queryString = window.location.search;
+const urlParams = new URLSearchParams(queryString);
+const serviceIds = urlParams.get('id');
+// alert(serviceIds);
+
+$(document).ready(function () {
+
+$("#formoid").submit(function(event){
+// alert(JSON.stringify(event));
+
+var userName = $('#unames').val();
+var pasWrdd = $('#pswrds').val();
+
+ var formdata = new FormData();
+
+ formdata.append("userName", userName);
+ formdata.append("password", pasWrdd);
+
+
+ var requestOptions = {
+   method: 'POST',
+   body: formdata,
+   redirect: 'follow'
+ };
+
+ // alert("neww");
+
+ fetch("https://apis.tradetipsapp.com/api/auth/appSignIn", requestOptions)
+   .then(response => response.json())
+   .then(result => {
+
+             var datak = JSON.stringify(result);
+             // alert(datak);
+             var dataResultp = JSON.parse(datak);
+             // alert(dataResultp.userName);
+             // alert(dataResultp.accessToken);
+             if(dataResultp.accessToken){
+
+               $(".successmsg1").html('<span>Login successfully '+dataResultp.userName+' !!</span>');
+             
+              setTimeout(function(){$(".successmsg1").empty()}, 3000);
+
+               setTimeout(function(){
+                // window.location.reload(1);
+                window.location.href = "/servicesdetailstepOne?id="+serviceIds+"&logindetail="+JSON.stringify(dataResultp); 
+                }, 2000);
+
+             }else{
+               
+               //  $(".successmsg").html('<span>"Your username or password is not correct."</span>');
+                $(".successmsg1").html(dataResultp.message);
+             
+              setTimeout(function(){$(".successmsg1").empty()}, 2000);
+
+               setTimeout(function(){
+                // window.location.reload(1);
+                window.location.href = "/servicesdetail?id="+serviceIds; 
+                }, 2100);
+
+             }
+            
+
+    })
+   .catch(error => console.log('error', error));
+
+
+});
+
+});
+
+</script>
+
+</html>
