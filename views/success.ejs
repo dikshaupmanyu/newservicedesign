@@ -1,139 +1,71 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8"/>
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>TradeTips</title>
-    <link rel="icon" href="images/favicon.png" type="image/png" sizes="16x16">
-    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="css/fontawesome1-all.min.css">
-    <link rel="stylesheet" type="text/css" href="css/icomoon/style.css">
-    <link rel="stylesheet" type="text/css" href="css/style1.css">
-    <link rel="stylesheet" type="text/css" href="css/responsive1.css">
-    <link rel="stylesheet" type="text/css" href="css/jquery.magicsearch.css">
-  </head>
-  <body>
-<style type="text/css">
-  .successmsg
-{ color: #fff;
-   padding-left: 350px;
-}
-
-/* .input-group{
-  width:180%
-} */
-
-/*.app_content{
-  right:12%;
-
-}*/
-
-.edit_profile_form{
-  /* position:relative;
-  left:30%; */
-width:100%
-}
-</style>
-</style>
-
-    <!-- Body Flyers Start -->
-    <div class="body_flyer body_flyer1">
-      <img src="images/body-flyer.png" alt="images">
-    </div>
-    <div class="body_flyer body_flyer2">
-      <img src="images/body-flyer.png" alt="images">
-    </div>
-    <!-- Body Flyers End -->
-
-   
-
-    <!-- Header Start -->
-    <div class="body_wrapper">
-      <div class="app_header">
-        <div class="app_header_logo">
-          <button class="btn mob_menu_btn side_toggle"><i class="fas fa-bars"></i></button>
-          <a href="#">
-            <img src="images/logo-icon.png" alt="images">
-            <h3 style="color: white;">TradeTips</h3>
-          </a>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>tradetips | paymentsucessful</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header class="header">
+        <div class="container-fluid">
+            <img class="img-fluid" src="img/tradetiplogo.svg" alt="logo">
         </div>
-        <div class="app_header_content">
-          <div class="dsbrd_container">
-            <div class="successmsg"></div>
-            <div class="app_header_content_left">
-              <!-- <h3>Free trial expire In 6 days <a href="#">Upgrade</a></h3> -->
-              <div class="header_search">
-             
+    </header>
+     <section class="paymentsucessful-section bg-grey">
+         <div class="container">
+              <div class="payment-sucessful ">
+                   <div class="card card-padd shadow-sm">
+                       <div class="sucess text-center">
+                          <img class="img-fluid mb-2" src="img/success.svg" alt="sucessful">
+                          <h2>Payment is Successfull</h2>
+                          <p>Thank you for your purchase.</p>
+                       </div>
+
+                        <div class="order-product sucess-product d-flex align-items-center">
+                        <div class="product-img mr-3">
+                            <img src="img/product.png" alt="product">
+                        </div>
+                        <div class="product-detail">
+                            <p class="d-inline-block mb-1" id="nameService"></p>
+                            <span class="d-block" id="mentorNameService"></span>
+                        </div>
+                        </div>
+                        <div class="what-next">
+                            <h3>What’s Next?</h3>
+                            <p>Look out for and email from Rurik@TradeTipsApp.com and the mentor James Jordan with instructions on getting started.</p>
+                            <p>Remember to check your Spam and Promotional folders if you do not receive an email about  your service within the next 72 hours.</p>
+                            <p>Visit us on <a href="www.tradetipsapp.com">TradeTipsApp.com</a> to learn more about TradeTips.</p>   
+                        </div>
+                        <div class="playstore mt-3">
+                            <p><b>Download the app today</b></p>
+                            <ul class="list-unstyled p-0 m-0">
+                                <li class="d-inline-block"><a href="#"><img src="img/appstore.svg" alt="appstore"></a></li>
+                                <li class="d-inline-block"></li><a href="#"><img src="img/googleplay.svg" alt="playstore"></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="contact-ftr d-flex align-items-center justify-content-between mt-4">
+                        <p class="m-0">If you experience any issues, please contact us at: </p>
+                        <a href="mailto: contact@tradtipsapp.com">Contact@TradeTipsApp.com</a>
+                    </div>
               </div>
-            </div>
-           
-          </div>
-        </div>
-      </div>
-
-  <div class="app_main">
-        
-           <div class="app_content">
-            <div class="dsbrd_container">
-              <div class="dashboard_wrapper row">
-                <div class="card-body">
-                <h3 class="card-title">Success !</h3> 
-                <h4 class="card-title">Thank you , <%= userName %> for signing up for</h4> 
-                <h4 class="card-title"><span id="nameService"></span></h4> 
-                <h4 class="card-title">By <span id="mentorNameService"></span></h4>
-                <h5 class="card-title">Next Steps :</h5>
-                <h6 class="card-title">Look out for an email at <%= userEmail %> with the instructions on getting started.</h6> 
-                <p class="card-text">Remember to check you Spam and Promotional folders if you do not received an email about our service in the next 72 hours.</p>
-                <p class="card-text">If you experience any issues please contact us at :</p> 
-                <p class="card-text">contact@TradeTipsApp.com</p>
-                </div> 
-              </div>
-            
-            </div>
-
-          </div>
-          <br>
-          
-                      
-
-  </div>
-  <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
-  
-      </div>
-    <div class="sidebar-overlay"></div>
-    </div>
-    <!-- Header End -->
-
+         </div>
+     </section>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 
-    <script type="text/javascript" src="js/jquery-3.5.1.slim.min.js"></script>
-    <script type="text/javascript" src="js/popper.min.js"></script>
-    <script type="text/javascript" src="js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="js/fontawesome-all.min.js"></script>
-    <script type="text/javascript" src="js/slimscroll.min.js"></script>
-    <script type="text/javascript" src="js/jquery-3.5.1.min.js"></script>
+<input type="text" class="form-control" id="serviceIdDetaildata" value="<%= service %>" style="display: none;">
 
-    <script type="text/javascript" src="js/custom.js"></script>
-    
-
- <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script> -->
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-    <script type="text/javascript" src="js/jquery.magicsearch.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-   
-<!--     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
- -->  </body>
-</html>
-
-
-
-<script type="text/javascript">
-
+  <script type="text/javascript">  
+  
   var subsids = "<%= service %>";
- 
+  // alert(subsids);
+
   var formdata = {serviceSubscriptionPlanId : subsids};
    $.ajax({
         type: 'POST',
@@ -143,25 +75,25 @@ width:100%
            var datak = JSON.stringify(data);
           // alert(datak);
           var dataResultp = JSON.parse(datak); 
-          // alert(dataResultp.title);
-           let str = dataResultp.stripeProductName;
+          // alert(JSON.stringify(dataResultp));
+          let str = dataResultp.stripeProductName;
           str = str.split("_")[0];
-
           document.getElementById("nameService").innerHTML = dataResultp.title;
-          document.getElementById("mentorNameService").innerHTML = str;
+          document.getElementById("mentorNameService").innerHTML = "By " + str;
+          // document.getElementById("priceServicess").innerHTML ="$" + parseFloat(dataResultp.price).toFixed(2);
+          // if(dataResultp.imageDetails == null){
+          //     document.getElementById("serviceImage").src = dataResultp.thumbnailImageUrl;
+          // }else{
+          //      document.getElementById("serviceImage").src = "https://apis.tradetipsapp.com" + dataResultp.imageDetails;
+          // }
         
-        
-        }
-
-      });
-
-  window.history.forward(); 
-       function noBack() { 
-           window.history.forward(); 
-       } 
-
- 
-      
-</script>
 
 
+
+
+}
+});
+
+  
+  </script>
+</html>
