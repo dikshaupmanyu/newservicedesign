@@ -10,6 +10,7 @@ var http = require('http');
 var https = require('https');
 var expressJwt = require('express-jwt');
 var jwt = require('jsonwebtoken');
+var bcrypt = require('bcrypt');
 var bodyParser = require('body-parser');
 var privateKey  = fs.readFileSync('sslcert/server.key', 'utf8');
 var certificate = fs.readFileSync('sslcert/server.crt', 'utf8');
@@ -34,9 +35,20 @@ console.log('The magic happens on port ' + port);
 
 	 app.get('/servicesdetail', function(req, res) {
 
+	 	// var serviceIddd = req.query.id;
 	 	var serviceIddd = req.query.id;
+	 	// var logindetails = req.query.logindetail;
+	 	// console.log(serviceIddd);
+	 	// console.log(JSON.stringify(logindetails));
+	 	// var fdata = JSON.stringify(logindetails);
+	 	// const obj = logindetails;
+	 	// console.log(obj);
+	 	var logintoken = req.query.accessToken;
+	 	var loginemail = req.query.email;
+	 	var loginname = req.query.userName;
+	 	var loginid = req.query.id;
 	    
-	    res.render('servicesdetail.ejs' , {serviceIdDetail : serviceIddd });
+	    res.render('servicesdetail.ejs' , {serviceIdDetail : serviceIddd , tokens : logintoken , email : loginemail , name : loginname , id : loginid});
 		     
 	 });
 
@@ -131,7 +143,7 @@ console.log('The magic happens on port ' + port);
          // console.log("hiiiii data " + JSON.stringify(paymentMethod));
 
         var options = { method: 'POST',
-            url: 'https://apis.tradetipsapp.com/api/stripePayment/createServiceSubscriptionPayment',
+            url: 'https://apistest.tradetipsapp.com/api/stripePayment/createServiceSubscriptionPayment',
             headers: 
              { 'postman-token': 'a1f3bad2-8aab-6d21-7162-d82350e953af',
                'cache-control': 'no-cache'},
@@ -173,3 +185,103 @@ console.log('The magic happens on port ' + port);
      };
 
 });
+
+app.post('/SignUp',function(req,res){
+   console.log(req.body)
+   // res.sendStatus(200)
+
+   try{
+      console.log('try')
+      const Signup = {
+         userName: req.body.userName,
+         email: req.body.email,
+         password: req.body.password,
+         confirmPassword: req.body.confirmpassword,
+      }
+
+      var option = { method: 'POST',
+                  url: 'https://apistest.tradetipsapp.com/api/appUser/newSignupPayment',
+                  headers: { 'postman-token': 'a1f3bad2-8aab-6d21-7162-d82350e953af',
+                              'cache-control': 'no-cache'},
+            //  authorization: 'Bearer '+req.body.tokendata },     
+                  formData: Signup
+            }
+      
+       request(option, function (error, response, body){
+         if(response){
+
+            console.log(response)
+            res.render("success.ejs" , {userName : req.body.userName, userEmail : req.body.emailData , service : req.body.serviceIds , mentorName : req.body.mentorName});
+         }
+      })
+   }catch(error) {
+      console.log(error)
+   }
+    
+
+})
+
+//   app.post('/servicesdetailstepSignUp', function(req, res){
+
+//    //   console.log(req.body);
+
+//         var options = { method: 'POST',
+//             url: 'https://apistest.tradetipsapp.com/api/appUser/newSignupPayment',
+//             headers: 
+//              { 'postman-token': 'a1f3bad2-8aab-6d21-7162-d82350e953af',
+//                'cache-control': 'no-cache'},
+//                // authorization: 'Bearer '+req.body.tokendata },     
+//                formData: {
+//                    userName: req.body.userName,
+//                   email: req.body.email,
+//                   password: req.body.password,
+//                   confirmPassword: req.body.confirmpassword,
+//          } };
+//          console.log("helo")
+//          console.log(options)
+//           request(options, function (error, response, body) {
+//             //  if ( email == '' || password == '' || conformPassword == '') {
+//             //     alert("Please enter all details")
+//             //     console.log("Please enter all details")
+//             //    }else{
+//                 if(response){
+   
+                  
+//                    console.log("ok")
+//                //  res.redirect("/servicesdetail", {name : req.body.userName, email : req.body.email , password: req.body.password ,  confirmPassword: req.body.confirmpassword,});
+                   
+   
+//                // }
+//              }
+
+          	
+//              // if (error) throw new Error(error);
+
+//             // {
+//             //   res.render('incomplete.ejs');
+//             // }
+//             // throw new Error(error);
+
+//             // console.log(response);
+//             // console.log(error);
+//             // console.log(body);
+//             // res.render('complete.ejs');
+//           });
+         
+         
+// });
+
+
+
+
+
+const securePasswords = async (password) =>{
+ const hashpassword =  await bcrypt.hash(password, 10);
+ console.log("HASH PASSWORD: " +   hashpassword);
+
+
+ const matchpassword =  await bcrypt.compare('yash1111', hashpassword);
+ console.log("MATCH PASSWORD: " +   matchpassword);
+}
+
+securePasswords('yash1111')
