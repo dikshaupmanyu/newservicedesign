@@ -88,19 +88,19 @@ console.log('The magic happens on port ' + port);
 
  app.get('/servicesdetailstepSignUp', function(req, res) {
 
-    var serviceIddd = req.query.id;
-    var logindetails = req.query.logindetail;
-    // console.log(serviceIddd);
-    // console.log(JSON.stringify(logindetails));
-    // var fdata = JSON.stringify(logindetails);
-    const obj = JSON.parse(logindetails);
-    // console.log(obj);
-    var logintoken = obj.accessToken;
-    var loginemail = obj.email;
-    var loginname = obj.userName;
-    var loginid = obj.id;
+    var serviceIddd = req.query.service;
+    // var logindetails = req.query.logindetail;
+    // // console.log(serviceIddd);
+    // // console.log(JSON.stringify(logindetails));
+    // // var fdata = JSON.stringify(logindetails);
+    // const obj = JSON.parse(logindetails);
+    // // console.log(obj);
+    // var logintoken = obj.accessToken;
+    var loginemail = req.query.email;
+    var loginname = req.query.name;
+    var loginid = req.query.id;
       
-      res.render('servicesdetailstepSignUp.ejs' , {serviceIdDetail : serviceIddd , tokens : logintoken , email : loginemail , name : loginname , id : loginid });
+      res.render('servicesdetailstepSignUp.ejs' , {serviceIdDetail : serviceIddd , email : loginemail , name : loginname , id : loginid });
          
    });
 
@@ -186,20 +186,32 @@ console.log('The magic happens on port ' + port);
 
 });
 
-app.post('/SignUp',function(req,res){
-   console.log(req.body)
+app.post('/SignUp',async function(req,res){
+   console.log(req.body);
    // res.sendStatus(200)
+
+ const hashpassword =  await bcrypt.hash(req.body.password, 10);
+ console.log("HASH PASSWORD: " +   hashpassword);
+
+
+ // const matchpassword =  await bcrypt.compare(req.body.password, hashpassword);
+ // console.log("MATCH PASSWORD: " +   matchpassword);
 
    try{
       console.log('try')
-      const Signup = {
+     
+
+      if(req.body.password == req.body.confirmpassword){
+
+        console.log("true");
+
+         const Signup = {
          userName: req.body.userName,
          email: req.body.email,
-         password: req.body.password,
-         confirmPassword: req.body.confirmpassword,
-      }
+         password: hashpassword,
+        }
 
-      var option = { method: 'POST',
+         var option = { method: 'POST',
                   url: 'https://apistest.tradetipsapp.com/api/appUser/newSignupPayment',
                   headers: { 'postman-token': 'a1f3bad2-8aab-6d21-7162-d82350e953af',
                               'cache-control': 'no-cache'},
@@ -207,13 +219,22 @@ app.post('/SignUp',function(req,res){
                   formData: Signup
             }
       
-       request(option, function (error, response, body){
-         if(response){
+         request(option, function (error, response, body){
+           if(response){
 
-            console.log(response)
-            res.render("success.ejs" , {userName : req.body.userName, userEmail : req.body.emailData , service : req.body.serviceIds , mentorName : req.body.mentorName});
-         }
-      })
+              console.log(body);
+
+              return res.redirect('/servicesdetailstepSignUp?service='+req.body.serviceIds+'&name='+req.body.userName+'&email='+req.body.email+'&id='+req.body.id);
+
+           }
+        })
+
+      }else{
+
+        console.log("false");
+      }
+
+     
    }catch(error) {
       console.log(error)
    }
