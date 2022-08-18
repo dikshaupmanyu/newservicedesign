@@ -47,8 +47,17 @@ console.log('The magic happens on port ' + port);
 	 	var loginemail = req.query.email;
 	 	var loginname = req.query.userName;
 	 	var loginid = req.query.id;
-	    
-	    res.render('servicesdetail.ejs' , {serviceIdDetail : serviceIddd , tokens : logintoken , email : loginemail , name : loginname , id : loginid});
+
+    var message = "hiii";
+
+    var message ;
+    if(req.query.message){
+      message = req.query.message;
+    }else{
+      message = "";
+    }
+
+	    res.render('servicesdetail.ejs' , {serviceIdDetail : serviceIddd , message : message, tokens : logintoken , email : loginemail , name : loginname , id : loginid});
 		     
 	 });
 
@@ -224,7 +233,22 @@ app.post('/SignUp',async function(req,res){
 
               console.log(body);
 
-              return res.redirect('/servicesdetailstepSignUp?service='+req.body.serviceIds+'&name='+req.body.userName+'&email='+req.body.email+'&id='+req.body.id);
+              const obj = JSON.parse(body);
+
+             console.log(obj.title);
+
+              console.log(obj.status);
+
+              if(obj.status == "false"){
+                
+                return res.redirect('/servicesdetail?id='+req.body.serviceIds+'&message='+obj.title);
+
+              }else{
+
+                return res.redirect('/servicesdetailstepSignUp?service='+req.body.serviceIds+'&name='+req.body.userName+'&email='+req.body.email+'&id='+req.body.id);
+
+              }
+
 
            }
         })
@@ -232,6 +256,10 @@ app.post('/SignUp',async function(req,res){
       }else{
 
         console.log("false");
+
+        var text = "password and confirmpassword not match.";
+
+        return res.redirect('/servicesdetail?id='+req.body.serviceIds+'&message='+text);
       }
 
      
