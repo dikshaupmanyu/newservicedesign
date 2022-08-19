@@ -1,4 +1,4 @@
-/* *{
+*{
     padding:0;
     margin:0;
 }
@@ -318,6 +318,16 @@ header.header {
     margin-top: 1rem;
     text-transform: capitalize;
 }
+.product-detail .product-img{
+    width:90px;
+    height: 90px;
+    object-fit: contain;
+}
+.order-product .product-img{
+    width: 90px;
+    height: 90px;
+    object-fit: contain;
+}
 @media (max-width:991px){
     .seprate-line{
         border-top: 1px solid #e3e3e3;
@@ -414,7 +424,12 @@ header.header {
         Padding: 15px 20px 15px 20px;
     }
 }
- */
+
+
+
+
+/* 
+
  *{
     padding:0;
     margin:0;
@@ -831,4 +846,4 @@ header.header {
         Padding: 15px 20px 15px 20px;
     }
 }
-
+ */

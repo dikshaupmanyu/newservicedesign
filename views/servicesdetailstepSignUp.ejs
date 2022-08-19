@@ -49,25 +49,15 @@
                 <h2 class="form-heading mb-4">Order Summary</h2>
                 <div class="order-summery">
                     <div class="order-content">
-                        <div class="order-product d-flex align-items-center justify-content-between">
-                            <div class="product-detail">
-                                <img src="img/product.png" alt="product">
-                                <p class="product-text d-inline-block" id="nameServiceorder"></p>
+                      <div class="order-product d-flex justify-content-between align-items-center">
+                        <div class="product-detail d-flex align-items-center">
+                            <div class="product-img">
+                                <img class="img-fluid w-100" src="img/product.png" alt="product">
                             </div>
-
-<!-- <div class="product-detail d-flex align-items-center">
-                                <div class="product-img">
-                                    <img class="img-fluid w-100" src="img/product.png" alt="product">
-                                </div>
-                                <p class="product-text d-inline-block">Video Subscription 1-1 for 30 mins</p>
-                            </div>
-<div class="product-detail">
-                                <img src="img/product.png" alt="product">
-                                <p class="product-text d-inline-block">Video Subscription 1-1 for 30 mins</p>
-                            </div> -->
-
-                            <h4 class="product-price" id="priceServiceorder"></h4>
+                            <p class="product-text d-inline-block"  id="nameServiceorder"></p>
                         </div>
+                        <h4 class="product-price"  id="priceServiceorder"></h4>
+                    </div>
                     </div>
                    <h5 class="promo">Enter A Promo Code</h5>
                    <form class="form-inline">
@@ -244,7 +234,7 @@
   var formdata = {serviceSubscriptionPlanId : subsids};
    $.ajax({
         type: 'POST',
-        url: 'https://apis.tradetipsapp.com/api/serviceMentorSubscriptionPlanWeb/getServiceSubscriptionPlanById',
+        url: 'https://apistest.tradetipsapp.com/api/serviceMentorSubscriptionPlanWeb/getServiceSubscriptionPlanById',
         data: formdata,
         success: function(data) {
            var datak = JSON.stringify(data);
@@ -281,7 +271,7 @@
           if(dataResultp.imageDetails == null){
               document.getElementById("serviceImage").src = dataResultp.thumbnailImageUrl;
           }else{
-               document.getElementById("serviceImage").src = "https://apis.tradetipsapp.com" + dataResultp.imageDetails;
+               document.getElementById("serviceImage").src = "https://apistest.tradetipsapp.com" + dataResultp.imageDetails;
           }
         
 
@@ -303,7 +293,7 @@ function validate(coupon) {
 
   $.ajax({
     type: "POST",
-    url: "https://apis.tradetipsapp.com/api/stripePayment/validateCoupon",
+    url: "https://apistest.tradetipsapp.com/api/stripePayment/validateCoupon",
     data: formdata,
     success: function (data, textStatus, jqXHR) {
       var finalpvals = data.percent_off;
