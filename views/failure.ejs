@@ -39,12 +39,15 @@
                 </div>
             </div>
             <div class="card card-padd shadow-sm rounded-card mb-3 mb-lg-4 position-relative">
-                 <div class="signup-thank">
-                    <h2 class="form-heading mb-4">Log in</h2>
-                    <p class="m-0"><%= name %></p>
-                    <p class="m-0"><%= email %></p>
-                 </div>
-                 <a class="btn btn-dark edit-btn" href="#">Edit</a>
+              <div class="signup-thank mb-3 mb-lg-4">
+                <h2 class="form-heading">Thank you for signing up for this service, <%= name %>!</h2>
+                <p class="m-0">Remember your username <%= name %> and password.</p>
+              </div>
+              <div class="what-next">
+                <h2 class="form-heading">What’s Next?</h2>
+                <p class="m-0">Once you complete payment below, look out for a Getting Started email from us at  <%= email %>
+                  Use your username and password to log into the TradeTips app. Download it from your app store. </p>
+              </div>
             </div>
             <div class="card card-padd shadow-sm rounded-card mb-3 mb-lg-4">
                 <h2 class="form-heading mb-4">Order Summary</h2>
@@ -61,16 +64,19 @@
                     </div>
                     </div>
                    <h5 class="promo">Enter A Promo Code</h5>
+                   <div class="row">
+                    <div class="col-lg-7">
                     <form class="form-inline">
-                      <input type="text" class="form-control mr-sm-2" name="text1" id="couponadd" placeholder="Enter Promo Code"
+                      <input type="text" class="form-control apply-input mr-sm-2" name="text1" id="couponadd" placeholder=""
                       style="margin-right: 10px" />
                         <button class="btn btn-main btn-blue my-2 my-sm-0" type="button" id="stockadd"
                       onclick="validate(document.getElementsByName('text1')[0].value)">Apply</button>
                     </form>
+                    <div class="successmsg3"></div>
+                    </div>
 
-                  <div class="successmsg3"></div>
-
-                    <div class="subtotal d-flex align-items-end justify-content-end flex-column mt-3">
+                  <div class="col-lg-5">
+                    <div class="subtotal d-flex align-items-end justify-content-end flex-column">
                         <div class="list-item">
                             <p>Subtotal</p>
                             <span id="priceServiceordertotal"></span>
@@ -80,10 +86,12 @@
                             <span id="discountorderservice">$0</span>
                         </div>
                         <div class="list-item">
-                            <p><b>Total</b></p>
+                            <p class="m-0"><b>Total</b></p>
                             <span><b id="priceServices"></b></span>
                         </div>  
                     </div>
+                    </div>
+                </div>
                 </div>
                 <h2 class="form-heading my-4 ">Enter Payment Information</h2>
                 <div class="row">
@@ -95,34 +103,43 @@
                           <input type="text" name="tokendata" value="<%= tokens %>" style="display: none" />
                           <input type="text" name="amount" id="prices" style="display: none" />
                           <input type="text" name="serviceIds" value="<%= service %>" style="display: none" />
-                            <div class="form-group form-row">
-                              <label class="col-12" for="exampleInputEmail1">Enter Card No.</label>
-                              <input type="text" class="form-control col-10" name="cardNumber" id="cardNumber"  placeholder="" onkeypress="return IsNumeric(event);" ondrop="return false;" onpaste="return false;"
+                          <div class="form-group form-row align-items-center ml-0">
+                            <label class="col-12" for="exampleInputEmail1">Enter Card No.</label>
+                            <input type="text" class="form-control col-md-10 col-12" name="cardNumber" id="cardNumber" placeholder=""
+                              onkeypress="return IsNumeric(event);" ondrop="return false;" onpaste="return false;"
                               required="required">
-                              <img class="col-2 card-img" src="img/card.svg" alt="img">
+                              <div class="card-img col-2">
+                                <img class="img-fluid" src="img/card.svg" alt="img">
+                              </div>
                               <span id="error" style="color: Red; display: none">* Input digits (0 - 9)</span>
+            
+                          </div>
+                          <div class="form-row align-items-center justify-content-between">
+                            <div class="form-group col-md-5 col-6 form-row align-items-center ml-0">
+                              <label for="">Expiry Date.</label>
+                              <input type="text" placeholder="MM/YY" class="form-control" onkeyup="formatString(event);"
+                                name="monthYear" maxlength="5">
+            
                             </div>
-                            <div class="form-row align-items-center justify-content-between">
-                                <div class="form-group col-md-5">
-                                  <label for="">Expiry Date.</label>
-                                  <input type="text" placeholder="MM/YY" class="form-control"  onkeyup="formatString(event);" name="monthYear"  maxlength="5">
+                            <div class="form-group col-md-6 col-6 form-row align-items-center ml-0">
+                              <label class="col-12" for="inputZip">CVV</label>
+                              <input type="text" class="form-control col-md-8 col-12" name="cvv" id="cvv" required="required"
+                                maxlength="3" onkeypress="return IsNumerics(event);" ondrop="return false;">
+                                <div class="card-img col-md-4 col-2">
+                                  <img class="img-fluid" src="img/cvv.svg" alt="img">
                                 </div>
-                                <div class="form-group col-md-5 form-row">
-                                    <label class="col-12" for="inputZip">CVV</label>
-                                    <input type="text" class="form-control col-md-8 col-10"  name="cvv" id="cvv" required="required" maxlength="3" onkeypress="return IsNumerics(event);" ondrop="return false;">
-                                    <img class="col-md-4 col-2" src="img/cvv.svg" alt="img">
-                                    <span id="errors" style="color: Red; display: none">* Input digits (0 - 9)</span>
-                                </div>
-                              </div>
-                               <div class="form-group">
-                                <label for="exampleInputPassword1">Enter Cardholder’s Name</label>
-                                <input type="text" class="form-control" placeholder="">
-                              </div>
-                              <div class="guranted d-flex align-items-center flex-column flex-md-row">
-                                <img src="img/lock.svg" alt="lock">
-                                <p class="m-0 mx-2">Guarenteed safe & secure checkout</p>
-                                <img src="img/stript.svg" alt="stript">
-                              </div>
+                              <span id="errors" style="color: Red; display: none">* Input digits (0 - 9)</span>
+                            </div>
+                          </div>
+                          <div class="form-group col-md-10 col-12 p-0">
+                            <label for="exampleInputPassword1">Enter Cardholder’s Name</label>
+                            <input type="text" class="form-control" placeholder="">
+                          </div>
+                          <div class="guranted d-flex align-items-center flex-row">
+                            <img src="img/lock.svg" alt="lock">
+                            <p class="mx-2">Guarenteed safe & secure checkout</p>
+                            <img src="img/stript.svg" alt="stript">
+                          </div>
                               <input type="submit" class="btn btn-main d-block w-100 btn-blue" value="Pay Securely">
                         </form>
                     </div>
@@ -299,6 +316,11 @@
         if (data.valid == true) {
           count++;
           if (count == 1) {
+            document.getElementById('coupan-applyed').style.display = 'block';
+            document.getElementById('stockadd').style.backgroundColor = '#828282';
+            document.getElementById('stockadd').innerHTML = 'Applied';
+
+            
             var Damount = pricess - fdiscount;
             document.getElementById("prices").value = fdiscount;
 

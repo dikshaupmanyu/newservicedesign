@@ -76,6 +76,34 @@ app.get('/failure', function (req, res) {
   res.render('failure.ejs', { serviceIdDetail: serviceIddd });
 
 });
+app.get('/forgetpassward', function (req, res) {
+
+  var serviceIddd = req.query.id;
+
+  res.render('forgetpassword.ejs', { serviceIdDetail: serviceIddd });
+
+});
+app.get('/emailauthonticate', function (req, res) {
+
+  var serviceIddd = req.query.id;
+
+  res.render('recover-mail.ejs', { serviceIdDetail: serviceIddd });
+
+});
+app.get('/setnewpassward', function (req, res) {
+
+  var serviceIddd = req.query.id;
+
+  res.render('setnewpassword.ejs', { serviceIdDetail: serviceIddd });
+
+});
+app.get('/successfull-update', function (req, res) {
+
+  var serviceIddd = req.query.id;
+
+  res.render('passward-update.ejs', { serviceIdDetail: serviceIddd });
+
+});
 
 app.get('/servicesdetailstepOne', function (req, res) {
 
