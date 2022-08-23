@@ -47,9 +47,10 @@
                               <div class="product-img">
                                   <img class="img-fluid w-100" src="img/product.png" alt="product">
                                 </div>
-                                <p class="product-text d-inline-block"  id="nameServiceorder"></p>
-                                <!-- <b class=" "  ><%= name %></b> -->
-                            </div>
+                                <b class="product-text "  id="nameServiceorder"></b>
+                                <b class="m-0 "><%= name %></b>
+                                
+                              </div>
                           <h4 class="product-price"  id="priceServiceorder"></h4>
                       </div>
                     </div>
@@ -62,7 +63,7 @@
                           <button class="btn  apply-btn btn-main btn-blue my-2 my-sm-0" type="button" id="stockadd"
                             onclick="validate(document.getElementsByName('text1')[0].value)">Apply</button>
                         </form>
-                        <br>
+                        <!-- <br> -->
                         <div class="successmsg3"></div>
                       </div>
                     <!-- </div> -->
@@ -319,7 +320,7 @@
               $(".successmsg3").empty();
             }, 3000);
 
-            document.getElementById("discountorderservice").innerHTML = `<span>-</span><span>${"$" + (fdiscount / 100).toString().match(/^-?\d+(?:\.\d{0,2})?/)[0]} </span>`;
+            document.getElementById("discountorderservice").innerHTML = `<span>- </span><span>${"$" + (fdiscount / 100).toString().match(/^-?\d+(?:\.\d{0,2})?/)[0]} </span>`;
 
             document.getElementById("priceServices").innerHTML = "$" + parseFloat(
               Damount / 100

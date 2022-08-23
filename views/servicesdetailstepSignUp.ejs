@@ -335,7 +335,7 @@
               $(".successmsg3").empty();
             }, 1200000);
 
-            document.getElementById("discountorderservice").innerHTML = `<span>-</span><span>${"$" + (fdiscount / 100).toString().match(/^-?\d+(?:\.\d{0,2})?/)[0]} </span>`;
+            document.getElementById("discountorderservice").innerHTML = `<span>- </span><span>${"$" + (fdiscount / 100).toString().match(/^-?\d+(?:\.\d{0,2})?/)[0]} </span>`;
 
             document.getElementById("priceServices").innerHTML = "$" + parseFloat(
               Damount / 100

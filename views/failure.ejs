@@ -45,7 +45,7 @@
               </div>
               <div class="what-next">
                 <h2 class="form-heading">What’s Next?</h2>
-                <p class="m-0">Once you complete payment below, look out for a Getting Started email from us at  <%= email %>
+                <p class="m-0">Once you complete the payment below, look out for a Getting Started email from us at  <%= email %>
                   Use your username and password to log into the TradeTips app. Download it from your app store. </p>
               </div>
             </div>
@@ -75,7 +75,7 @@
                     <div class="successmsg3"></div>
                     </div>
 
-                  <div class="col-lg-5">
+                  <div class="col-lg-5" id="coupan-applyed" style="display:none">
                     <div class="subtotal d-flex align-items-end justify-content-end flex-column">
                         <div class="list-item">
                             <p>Subtotal</p>
@@ -330,7 +330,7 @@
               $(".successmsg3").empty();
             }, 1200000);
 
-            document.getElementById("discountorderservice").innerHTML = `<span>-</span><span>${"$" + (fdiscount / 100).toString().match(/^-?\d+(?:\.\d{0,2})?/)[0]} </span>`;
+            document.getElementById("discountorderservice").innerHTML = `<span>- </span><span>${"$" + (fdiscount / 100).toString().match(/^-?\d+(?:\.\d{0,2})?/)[0]} </span>`;
 
             document.getElementById("priceServices").innerHTML = "$" + parseFloat(
               Damount / 100
