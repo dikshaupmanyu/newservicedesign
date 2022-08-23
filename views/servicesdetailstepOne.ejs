@@ -46,9 +46,10 @@
                           <div class="product-detail d-flex align-items-center">
                               <div class="product-img">
                                   <img class="img-fluid w-100" src="img/product.png" alt="product">
-                              </div>
-                              <p class="product-text d-inline-block"  id="nameServiceorder"></p>
-                          </div>
+                                </div>
+                                <p class="product-text d-inline-block"  id="nameServiceorder"></p>
+                                <!-- <b class=" "  ><%= name %></b> -->
+                            </div>
                           <h4 class="product-price"  id="priceServiceorder"></h4>
                       </div>
                     </div>
@@ -97,7 +98,7 @@
                           <input type="text" name="amount" id="prices" style="display: none" />
                           <input type="text" name="serviceIds" value="<%= serviceIdDetail %>" style="display: none" />
                             <div  class="form-group form-row align-items-center ml-0">
-                              <label class="col-12" for="exampleInputEmail1">Enter Card No.</label>
+                              <label class="col-12" for="exampleInputEmail1">Enter Card Number</label>
                               <input type="text" class="form-control col-md-10 col-12" name="cardNumber" id="cardNumber"  placeholder="" onkeypress="return IsNumeric(event);" ondrop="return false;" onpaste="return false;"
                               required="required">
                               <div class="card-img col-2">
@@ -107,7 +108,7 @@
                             </div>
                             <div class="form-row align-items-center justify-content-between">
                                 <div class="form-group col-md-5 col-6 form-row align-items-center ml-0">
-                                  <label for="">Expiry Date.</label>
+                                  <label for="">Exp. Date</label>
                                   <input type="text" placeholder="MM/YY" class="form-control"  onkeyup="formatString(event);" name="monthYear"  maxlength="5">
                                 </div>
                                 <div class="form-group col-md-6 col-6 form-row align-items-center ml-0">
@@ -318,7 +319,7 @@
               $(".successmsg3").empty();
             }, 3000);
 
-            document.getElementById("discountorderservice").innerHTML = `<span>${"$" + (fdiscount / 100).toString().match(/^-?\d+(?:\.\d{0,2})?/)[0]} </span>`;
+            document.getElementById("discountorderservice").innerHTML = `<span>-</span><span>${"$" + (fdiscount / 100).toString().match(/^-?\d+(?:\.\d{0,2})?/)[0]} </span>`;
 
             document.getElementById("priceServices").innerHTML = "$" + parseFloat(
               Damount / 100

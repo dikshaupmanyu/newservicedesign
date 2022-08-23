@@ -86,8 +86,9 @@ app.get('/forgetpassward', function (req, res) {
 app.get('/emailauthonticate', function (req, res) {
 
   var serviceIddd = req.query.id;
-
-  res.render('recover-mail.ejs', { serviceIdDetail: serviceIddd });
+  var Email = req.query.email
+console.log(Email)
+  res.render('recover-mail.ejs', { serviceIdDetail: serviceIddd, Email:Email });
 
 });
 app.get('/setnewpassward', function (req, res) {

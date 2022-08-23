@@ -36,10 +36,8 @@
                 <div class="row">
                     <div class="col-lg-6">
                         <div class="signup padd_x20">
-                            <h2 class="form-heading">Sign up for this Service</h2>
-                            <div class="successmsg2" style="text-align: center;"> <%= message %></div>
-                           
-                            <br>
+                            <h2 class="form-heading">Sign-up for this Service</h2>
+                            <div class="successmsg2" style="text-align: center; margin-bottom: 12px;"> <%= message %></div>
                             <form action="/SignUp" method="POST" >
                               <!-- <input type="text" name="g-recaptcha-response" style="display: none" /> -->
                           <input type="text" name="userId" value="<%= id %>" style="display: none" />
@@ -87,8 +85,7 @@
                     <div class="col-lg-6 mt-4 mt-lg-0 seprate-line">
                         <div class="login-form padd_x20">
                             <h2 class="form-heading">Have a TradeTips Account?  Log in</h2>
-                               <div class="successmsg1" style="text-align: center;"></div>
-                               <br>
+                               <div class="successmsg1" style="text-align: center; margin-bottom: 12px;"></div>
                             <form id="formoid" method="post" onsubmit="return false">
                                 <div class="form-group">
                                   <label>Enter Username</label>
