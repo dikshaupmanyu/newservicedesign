@@ -240,6 +240,15 @@ header.header {
     margin-left: 16px;
     font-weight: 500;
     color: #38383C;
+    margin-bottom: 0px;
+}
+
+.product-mentor{
+    margin-left: 16px;
+    font-size:14px;
+    font-weight: 500;
+    margin-bottom: 0;
+    color:#38383C
 }
 .promo{
     font-weight: 500;
