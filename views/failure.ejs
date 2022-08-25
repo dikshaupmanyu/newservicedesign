@@ -60,7 +60,7 @@
                             </div>
                             <div>
                               <p class="product-text d-inline-block" id="nameServiceorder"></p>
-                              <p class="product-mentor"><%= name %></p>
+                              <p class="product-mentor"  id="mentorNameOrderService"></p>
                             </div>
                         </div>
                         <h4 class="product-price"  id="priceServiceorder"></h4>
@@ -270,6 +270,7 @@
           document.getElementById("shortDescriptionService").innerHTML = dataResultp.descriptionOne;
           // document.getElementById("longDescriptionService").innerHTML = dataResultp.descriptionTwo;
           document.getElementById("mentorNameService").innerHTML = "By " + str;
+          document.getElementById("mentorNameOrderService").innerHTML = "By " + str;
           if(dataResultp.frequency == "0"){
                document.getElementById("frequncyService").innerHTML = "One Time Subscription : " ;
           }else if(dataResultp.frequency == "1"){ 
