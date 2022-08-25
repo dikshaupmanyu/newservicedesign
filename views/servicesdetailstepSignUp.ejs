@@ -59,7 +59,7 @@
                 </div>
                 <div>
                   <p class="product-text d-inline-block" id="nameServiceorder"></p>
-                  <p class="product-mentor"><%= name %></p>
+                  <p class="product-mentor"  id="mentorNameOrderService"></p>
                 </div>
               </div>
               <h4 class="product-price" id="priceServiceorder"></h4>
@@ -265,12 +265,13 @@
       // alert(JSON.stringify(dataResultp));
       let str = dataResultp.stripeProductName;
       str = str.split("_")[0];
-      document.getElementById("typeService").innerHTML = dataResultp.serviceTypeMaster.description;
+      document.getElementById("typeService").innerHTML = dataResultp.serviceTypeMaster.title;
       document.getElementById("nameService").innerHTML = dataResultp.title;
       document.getElementById("nameServiceorder").innerHTML = dataResultp.title;
       document.getElementById("shortDescriptionService").innerHTML = dataResultp.descriptionOne;
       // document.getElementById("longDescriptionService").innerHTML = dataResultp.descriptionTwo;
       document.getElementById("mentorNameService").innerHTML = "By " + str;
+      document.getElementById("mentorNameOrderService").innerHTML = "By " + str;
       if (dataResultp.frequency == "0") {
         document.getElementById("frequncyService").innerHTML = "One Time Subscription : ";
       } else if (dataResultp.frequency == "1") {
@@ -355,7 +356,7 @@
       },
       error: function (errMsg) {
         $(".successmsg3").html(
-          "Sorry, The Coupon Code you entered is invalid. Please check and try again!"
+          "Sorry, the promo code you entered is incorrect. Please try again."
         );
         setTimeout(function () {
           $(".successmsg3").empty();
