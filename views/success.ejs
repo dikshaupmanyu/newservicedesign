@@ -20,24 +20,24 @@
                    <div class="card card-padd shadow-sm">
                        <div class="sucess text-center">
                           <img class="img-fluid mb-2" src="img/success.svg" alt="sucessful">
-                          <h2>Payment is Successfull</h2>
+                          <h2>Your Payment was Successful</h2>
                           <p>Thank you for your purchase.</p>
                        </div>
-
-                        <div class="order-product sucess-product d-flex align-items-center">
+                       <div class="order-product sucess-product d-flex align-items-center">
                         <div class="product-img mr-3">
-                            <img src="img/product.png" alt="product">
+                            <img class="img-fluid w-100" id="serviceImage" alt="product">
                         </div>
                         <div class="product-detail">
                             <p class="d-inline-block mb-1" id="nameService"></p>
                             <span class="d-block" id="mentorNameService"></span>
                         </div>
                         </div>
+                       
                         <div class="what-next">
                             <h3>What’s Next?</h3>
                             <p>Look out for and email from Rurik@TradeTipsApp.com and the mentor James Jordan with instructions on getting started.</p>
                             <p>Remember to check your Spam and Promotional folders if you do not receive an email about  your service within the next 72 hours.</p>
-                            <p>Visit us on <a href="www.tradetipsapp.com">TradeTipsApp.com</a> to learn more about TradeTips.</p>   
+                            <p>Visit us on <a href="www.tradetipsapp.com">TradeTipsApp.com</a> to contact us.</p>   
                         </div>
                         <div class="playstore mt-3">
                             <p><b>Download the app today</b></p>
@@ -69,7 +69,7 @@
   var formdata = {serviceSubscriptionPlanId : subsids};
    $.ajax({
         type: 'POST',
-        url: 'https://apis.tradetipsapp.com/api/serviceMentorSubscriptionPlanWeb/getServiceSubscriptionPlanById',
+        url: 'https://apistest.tradetipsapp.com/api/serviceMentorSubscriptionPlanWeb/getServiceSubscriptionPlanById',
         data: formdata,
         success: function(data) {
            var datak = JSON.stringify(data);
@@ -81,11 +81,11 @@
           document.getElementById("nameService").innerHTML = dataResultp.title;
           document.getElementById("mentorNameService").innerHTML = "By " + str;
           // document.getElementById("priceServicess").innerHTML ="$" + parseFloat(dataResultp.price).toFixed(2);
-          // if(dataResultp.imageDetails == null){
-          //     document.getElementById("serviceImage").src = dataResultp.thumbnailImageUrl;
-          // }else{
-          //      document.getElementById("serviceImage").src = "https://apis.tradetipsapp.com" + dataResultp.imageDetails;
-          // }
+          if(dataResultp.imageDetails == null){
+              document.getElementById("serviceImage").src = dataResultp.thumbnailImageUrl;
+          }else{
+               document.getElementById("serviceImage").src = "https://apistest.tradetipsapp.com" + dataResultp.imageDetails;
+          }
         
 
 

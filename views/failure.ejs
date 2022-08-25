@@ -56,7 +56,7 @@
                       <div class="order-product d-flex justify-content-between align-items-center">
                         <div class="product-detail d-flex align-items-center">
                             <div class="product-img">
-                                <img class="img-fluid w-100" src="img/product.png" alt="product">
+                                <img class="img-fluid w-100" id="serviceImage" alt="product">
                             </div>
                             <div>
                               <p class="product-text d-inline-block" id="nameServiceorder"></p>
@@ -288,7 +288,11 @@
           document.getElementById("priceServiceordertotal").innerHTML = "$" + parseFloat(dataResultp.price).toFixed(2);
           document.getElementById("prices").value = dataResultp.price * 100;
           document.getElementById("priceServices").innerHTML = "$" + parseFloat(dataResultp.price).toFixed(2);
-
+          if(dataResultp.imageDetails == null){
+              document.getElementById("serviceImage").src = dataResultp.thumbnailImageUrl;
+          }else{
+               document.getElementById("serviceImage").src = "https://apistest.tradetipsapp.com" + dataResultp.imageDetails;
+          }
 
           // document.getElementById("priceServicess").innerHTML ="$" + parseFloat(dataResultp.price).toFixed(2);
          
