@@ -318,9 +318,9 @@
 
             $(".successmsg3").html(" Discount applied. Please continue your purchase.");
 
-            setTimeout(function () {
-              $(".successmsg3").empty();
-            }, 3000);
+            // setTimeout(function () {
+            //   $(".successmsg3").empty();
+            // }, 3000);
 
             document.getElementById("discountorderservice").innerHTML = `<span>- </span><span>${"$" + (fdiscount / 100).toString().match(/^-?\d+(?:\.\d{0,2})?/)[0]} </span>`;
 
@@ -332,9 +332,9 @@
             $(".successmsg3").html(
               "Sorry, You can apply coupan code only once"
             );
-            setTimeout(function () {
-              $(".successmsg3").empty();
-            }, 3000);
+            // setTimeout(function () {
+            //   $(".successmsg3").empty();
+            // }, 3000);
           }
         }
       },
@@ -343,9 +343,9 @@
         $(".successmsg3").html(
           "Sorry, the promo code you entered is incorrect. Please try again."
           );
-          setTimeout(function () {
-            $(".successmsg3").empty();
-          }, 3000);
+          // setTimeout(function () {
+          //   $(".successmsg3").empty();
+          // }, 3000);
           
       },
     });
