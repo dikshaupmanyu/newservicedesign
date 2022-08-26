@@ -8,6 +8,11 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
     <link rel="stylesheet" href="css/style.css">
 </head>
+<style type="text/css">
+  .subscription .sub-price {
+    margin-left: 0.5rem;
+}
+</style>
 <body>
    <input type="text" name="amount" id="prices" style="display: none" />
        <header class="header">
@@ -45,8 +50,8 @@
                 </div>
                 <div class="what-next">
                   <h2 class="form-heading">What’s Next?</h2>
-                  <p class="m-0">Once you complete the payment below, look out for a Getting Started email from us at  <%= email %>
-                    Use your username and password to log into the TradeTips app. Download it from your app store. </p>
+                  <p class="m-0">Once you complete the payment below, look out for a <b>Getting Started</b> email from us at  <b><%= email %></b> <br>
+                    Use your username and password to log in to the TradeTips app (download it from your app store). </p>
                 </div>
                 <!--  <a class="btn btn-dark edit-btn" href="http://www.example.com/">Edit</a> -->
               </div>
@@ -272,17 +277,17 @@
           document.getElementById("mentorNameService").innerHTML = "By " + str;
           document.getElementById("mentorNameOrderService").innerHTML = "By " + str;
           if(dataResultp.frequency == "0"){
-               document.getElementById("frequncyService").innerHTML = "One Time Subscription : " ;
+               document.getElementById("frequncyService").innerHTML = "One Time Subscription:";
           }else if(dataResultp.frequency == "1"){ 
-                document.getElementById("frequncyService").innerHTML = "Daily Subscription : ";
+                document.getElementById("frequncyService").innerHTML = "Daily Subscription:";
           }else if(dataResultp.frequency == "7"){
-              document.getElementById("frequncyService").innerHTML = "Weekly Subscription : ";
+              document.getElementById("frequncyService").innerHTML = "Weekly Subscription:";
           }else if(dataResultp.frequency == "15"){
-              document.getElementById("frequncyService").innerHTML = "Bi-weekly Subscription : ";
+              document.getElementById("frequncyService").innerHTML = "Bi-weekly Subscription:";
           }else if(dataResultp.frequency == "30"){
-              document.getElementById("frequncyService").innerHTML = "Monthly Subscription : ";
+              document.getElementById("frequncyService").innerHTML = "Monthly Subscription:";
           }else {
-              document.getElementById("frequncyService").innerHTML = "Yearly Subscription : ";
+              document.getElementById("frequncyService").innerHTML = "Yearly Subscription:";
           }
           document.getElementById("priceService").innerHTML = "$" + parseFloat(dataResultp.price).toFixed(2);
           document.getElementById("priceServiceorder").innerHTML = "$" + parseFloat(dataResultp.price).toFixed(2);
@@ -358,7 +363,7 @@
       error: function (errMsg) {
         
         $(".successmsg3").html(
-          "Sorry, the promo code you entered is incorrect. Please try again."
+          "Sorry, the promo code you entered is incorrect.<br/> Please try again."
           );
           // setTimeout(function () {
           //   $(".successmsg3").empty();

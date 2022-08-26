@@ -10,6 +10,11 @@
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 
 </head>
+<style type="text/css">
+  .subscription .sub-price {
+    margin-left: 0.5rem;
+}
+</style>
 <body>
   <!-- <input type="text" name="amount" id="prices" style="display: none" /> -->
   <header class="header">
@@ -78,7 +83,7 @@
                                 </div>
                                 <!-- <a href="http://www.example.com/" class="btn btn-main btn-black d-block w-100">Create & Continue</a> -->
                                 <!-- <button class="btn btn-main btn-black d-block w-100" id="formRegister" type="button" >Create & Continue</button> -->
-                                <input class="btn btn-main btn-black d-block w-100" id="formRegister" type="submit" value="Create & Continue"></input>
+                                <input class="btn btn-main btn-black d-block w-100" id="formRegister" type="submit" value="Sign up & Continue"></input>
                               </form>
                         </div>
                     </div>
@@ -95,8 +100,8 @@
                                   <label>Enter Password</label>
                                   <input type="password" id="pswrds" name="password" class="form-control" >
                                 </div>
-                                <a class="forgot-pass" href="/forgetpassward">Forget Password?</a>
-                                <button class="btn btn-main btn-blue d-block w-100" type="submit">Submit</button>
+                                <a class="forgot-pass" href="/forgetpassward">Forgot Password?</a>
+                                <button class="btn btn-main btn-blue d-block w-100" type="submit">Log in & Continue</button>
                               </form>
                         </div>
                         <span class="or-logo">or</span>
@@ -138,17 +143,17 @@
           // document.getElementById("longDescriptionService").innerHTML = dataResultp.descriptionTwo;
           document.getElementById("mentorNameService").innerHTML = "By " + str;
           if(dataResultp.frequency == "0"){
-               document.getElementById("frequncyService").innerHTML = "One Time Subscription : " ;
+               document.getElementById("frequncyService").innerHTML = "One Time Subscription:";
           }else if(dataResultp.frequency == "1"){ 
-                document.getElementById("frequncyService").innerHTML = "Daily Subscription : ";
+                document.getElementById("frequncyService").innerHTML = "Daily Subscription:";
           }else if(dataResultp.frequency == "7"){
-              document.getElementById("frequncyService").innerHTML = "Weekly Subscription : ";
+              document.getElementById("frequncyService").innerHTML = "Weekly Subscription:";
           }else if(dataResultp.frequency == "15"){
-              document.getElementById("frequncyService").innerHTML = "Bi-weekly Subscription : ";
+              document.getElementById("frequncyService").innerHTML = "Bi-weekly Subscription:";
           }else if(dataResultp.frequency == "30"){
-              document.getElementById("frequncyService").innerHTML = "Monthly Subscription : ";
+              document.getElementById("frequncyService").innerHTML = "Monthly Subscription:";
           }else {
-              document.getElementById("frequncyService").innerHTML = "Yearly Subscription : ";
+              document.getElementById("frequncyService").innerHTML = "Yearly Subscription:";
           }
           document.getElementById("priceService").innerHTML = "$" + parseFloat(dataResultp.price).toFixed(2);
           // document.getElementById("priceServicess").innerHTML ="$" + parseFloat(dataResultp.price).toFixed(2);
