@@ -152,7 +152,7 @@ app.post('/payment', async function (req, res) {
 
   console.log(req.body);
 
-  var couponId = req.body.text1;
+  var couponId = req.body.couponIds;
 
   let months = req.body.monthYear;
   months = months.split("/")[0];
@@ -160,7 +160,8 @@ app.post('/payment', async function (req, res) {
   let dates = req.body.monthYear;
   dates = dates.split("/")[1];
   // console.log(dates);
-  const stripe = require('stripe')('pk_live_7b9zLcAaGBVeu14tr9Jueznl00HCPZZOU1');
+  // const stripe = require('stripe')('pk_live_7b9zLcAaGBVeu14tr9Jueznl00HCPZZOU1');
+  const stripe = require('stripe')('pk_test_Pbri8k4HUNcegrgjAohigZKF002BpByODh');
 
   try {
 
@@ -193,39 +194,36 @@ app.post('/payment', async function (req, res) {
         userName: req.body.userName,
         paymentId: paymentMethod.id,
         serviceSubscriptionPlanId: req.body.serviceIds,
-        couponId: req.body.text1
+        couponId: req.body.couponIds
       }
     };
 
+    // console.log(options);
+
     request(options, function (error, response, body) {
 
-      // console.log("body data  " + JSON.stringify(response)); 
-      // console.log("error data " + error);
+       // console.log("body data  " + JSON.stringify(response)); 
+        // console.log("error data " + error);
       if (response) {
 
-
-
         res.render("success.ejs", { userName: req.body.userName, userEmail: req.body.emailData, service: req.body.serviceIds, mentorName: req.body.mentorName });
-      }
-      // if (error) throw new Error(error);
+      
+      } 
+      // else{
 
-      // {
-      //   res.render('incomplete.ejs');
+      //   res.render("failure.ejs", { data: error, service: req.body.serviceIds, name: req.body.userName, email: req.body.emailData, id: req.body.userId, tokens: req.body.tokendata });
+
       // }
-      // throw new Error(error);
-
-      // console.log(response);
-      // console.log(error);
-      // console.log(body);
-      // res.render('complete.ejs');
+     
     });
 
 
-  } catch (error) {
+  } 
+  catch (error) {
 
-    console.log(error.raw.message);
+    console.log(error);
 
-    res.render("failure.ejs", { data: error.raw.message, service: req.body.serviceIds, name: req.body.userName, email: req.body.emailData, id: req.body.userId, tokens: req.body.tokendata });
+     res.render("failure.ejs", { data: error, service: req.body.serviceIds, name: req.body.userName, email: req.body.emailData, id: req.body.userId, tokens: req.body.tokendata });
   };
 
 });

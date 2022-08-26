@@ -16,7 +16,6 @@
 }
 </style>
 <body>
-  <input type="text" name="amount" id="prices" style="display: none" />
   <header class="header">
     <div class="container-fluid">
       <img class="img-fluid" src="img/tradetiplogo.svg" alt="logo">
@@ -106,6 +105,12 @@
         <div class="row">
           <div class="col-lg-7">
             <form action="payment" method="POST" onSubmit="handleFormSubmit(this); return false;">
+               <input type="text" name="userName" value="<%= name %>" style="display: none" />
+                          <input type="text" name="userId" value="<%= id %>" style="display: none" />
+                          <input type="text" name="emailData" value="<%= email %>" style="display: none" />
+                          <input type="text" name="amount" id="prices" style="display: none" />
+                          <input type="text" name="serviceIds" value="<%= serviceIdDetail %>" style="display: none" />
+                          <input type="text" name="couponIds" id="couponcode" style="display: none"/>
               <div class="form-group form-row align-items-center ml-0">
                 <label class="col-12" for="exampleInputEmail1">Enter Card Number</label>
                 <input type="text" class="form-control col-md-10 col-12" name="cardNumber" id="cardNumber" placeholder=""
@@ -136,7 +141,7 @@
               </div>
               <div class="form-group col-md-10 col-12 p-0">
                 <label for="exampleInputPassword1">Enter Cardholder’s Name</label>
-                <input type="text" class="form-control" placeholder="">
+                <input type="text" class="form-control" name="cardName" placeholder="">
               </div>
               <div class="guranted d-flex align-items-center flex-row">
                 <img src="img/lock.svg" alt="lock">
@@ -312,10 +317,10 @@
 
   //////////////////////////coupon code validation /////////////////////////////////////////////
 
-  var count = 0;
+    var count = 0;
 
   function validate(coupon) {
-
+    
     var formdata = { couponId: coupon };
 
     $.ajax({
@@ -335,24 +340,27 @@
 
 
             var Damount = pricess - fdiscount;
-            document.getElementById("prices").value = fdiscount;
-
+            document.getElementById("prices").value = Damount;
+            document.getElementById("couponcode").value = coupon;
             $(".successmsg3").html(" Discount applied. Please continue your purchase.");
 
             // setTimeout(function () {
             //   $(".successmsg3").empty();
-            // }, 1200000);
+            // }, 3000);
 
-             document.getElementById("discountorderservice").innerHTML = `<span>- </span><span>${"$" + parseFloat(fdiscount / 100).toFixed(2).match(/^-?\d+(?:\.\d{0,2})?/)[0]} </span>`;
-
+            document.getElementById("discountorderservice").innerHTML = `<span>- </span><span>${"$" + parseFloat(fdiscount / 100).toFixed(2).match(/^-?\d+(?:\.\d{0,2})?/)[0]} </span>`;
 
             document.getElementById("priceServices").innerHTML = "$" + parseFloat(
               Damount / 100
             ).toFixed(2);
           } else {
+            
             $(".successmsg3").html(
               "Sorry, You can apply coupan code only once"
             );
+               document.getElementById("prices").value = fdiscount;
+               document.getElementById("couponcode").value = "";
+
             // setTimeout(function () {
             //   $(".successmsg3").empty();
             // }, 3000);
@@ -360,12 +368,18 @@
         }
       },
       error: function (errMsg) {
+        
         $(".successmsg3").html(
           "Sorry, the promo code you entered is incorrect.<br/> Please try again."
-        );
-        // setTimeout(function () {
-        //   $(".successmsg3").empty();
-        // }, 3000);
+          );
+
+         document.getElementById("prices").value = fdiscount;
+         document.getElementById("couponcode").value = "";
+
+          // setTimeout(function () {
+          //   $(".successmsg3").empty();
+          // }, 3000);
+          
       },
     });
   }
