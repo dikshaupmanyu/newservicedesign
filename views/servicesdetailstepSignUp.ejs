@@ -59,7 +59,7 @@
             <div class="order-product d-flex justify-content-between align-items-center">
               <div class="product-detail d-flex align-items-center">
                 <div class="product-img">
-                  <img class="img-fluid w-100" id="serviceImage" alt="product">
+                  <img class="img-fluid w-100 h-100" id="serviceImage" alt="product">
                 </div>
                 <div>
                   <p class="product-text d-inline-block" id="nameServiceorder"></p>
@@ -343,7 +343,8 @@
             //   $(".successmsg3").empty();
             // }, 1200000);
 
-            document.getElementById("discountorderservice").innerHTML = `<span>- </span><span>${"$" + (fdiscount / 100).toString().match(/^-?\d+(?:\.\d{0,2})?/)[0]} </span>`;
+             document.getElementById("discountorderservice").innerHTML = `<span>- </span><span>${"$" + parseFloat(fdiscount / 100).toFixed(2).match(/^-?\d+(?:\.\d{0,2})?/)[0]} </span>`;
+
 
             document.getElementById("priceServices").innerHTML = "$" + parseFloat(
               Damount / 100
