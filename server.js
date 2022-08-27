@@ -16,11 +16,11 @@ var privateKey = fs.readFileSync('sslcert/server.key', 'utf8');
 var certificate = fs.readFileSync('sslcert/server.crt', 'utf8');
 var credentials = { key: privateKey, cert: certificate };
 /////////////////////////////////////////
-var httpServer = http.createServer(app);
-// var httpsServer = https.createServer(credentials, app);
+//var httpServer = http.createServer(app);
+var httpsServer = https.createServer(credentials, app);
 
-httpServer.listen(port);
-// httpsServer.listen(port);
+// httpServer.listen(port);
+httpsServer.listen(port);
 console.log('The magic happens on port ' + port);
 
 
@@ -160,8 +160,8 @@ app.post('/payment', async function (req, res) {
   let dates = req.body.monthYear;
   dates = dates.split("/")[1];
   // console.log(dates);
-  // const stripe = require('stripe')('pk_live_7b9zLcAaGBVeu14tr9Jueznl00HCPZZOU1');
-  const stripe = require('stripe')('pk_test_Pbri8k4HUNcegrgjAohigZKF002BpByODh');
+  const stripe = require('stripe')('pk_live_7b9zLcAaGBVeu14tr9Jueznl00HCPZZOU1');
+  // const stripe = require('stripe')('pk_test_Pbri8k4HUNcegrgjAohigZKF002BpByODh');
 
   try {
 
