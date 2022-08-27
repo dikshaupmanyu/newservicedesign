@@ -165,14 +165,24 @@
 
 <!-- on press enter  -->
 <script type="text/javascript">
+  // var lengths = $("#cardNumber").value.length;
+  var textbox = document.getElementById("cardNumber");
+
   $(document).on('keypress', 'input,select', function (e) {
-      if (e.which == 13) {
-          e.preventDefault();
-          var $next = $('[tabIndex=' + (+this.tabIndex + 1) + ']');
-          console.log($next.length);
-          if (!$next.length) {
-         $next = $('[tabIndex=1]');        }
-          $next.focus() .click();
+    if (e.which == 13) {
+      if(textbox.value.length != 19)
+      {
+console.log('not')
+      }else{
+        e.preventDefault();
+        var $next = $('[tabIndex=' + (+this.tabIndex + 1) + ']');
+        console.log($next.length);
+        if (!$next.length) {
+       $next = $('[tabIndex=1]');        }
+        $next.focus() .click();
+
+      }
+        // console.log()
       }
   });
   </script>
