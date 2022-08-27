@@ -69,7 +69,7 @@
   var formdata = {serviceSubscriptionPlanId : subsids};
    $.ajax({
         type: 'POST',
-        url: 'https://apistest.tradetipsapp.com/api/serviceMentorSubscriptionPlanWeb/getServiceSubscriptionPlanById',
+        url: 'https://apis.tradetipsapp.com/api/serviceMentorSubscriptionPlanWeb/getServiceSubscriptionPlanById',
         data: formdata,
         success: function(data) {
            var datak = JSON.stringify(data);
@@ -84,7 +84,7 @@
           if(dataResultp.imageDetails == null){
               document.getElementById("serviceImage").src = dataResultp.thumbnailImageUrl;
           }else{
-               document.getElementById("serviceImage").src = "https://apistest.tradetipsapp.com" + dataResultp.imageDetails;
+               document.getElementById("serviceImage").src = "https://apis.tradetipsapp.com" + dataResultp.imageDetails;
           }
         
 

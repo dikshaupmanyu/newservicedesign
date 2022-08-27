@@ -183,7 +183,7 @@ app.post('/payment', async function (req, res) {
 
     var options = {
       method: 'POST',
-      url: 'https://apistest.tradetipsapp.com/api/stripePayment/createServiceSubscriptionPayment',
+      url: 'https://apis.tradetipsapp.com/api/stripePayment/createServiceSubscriptionPayment',
       headers:
       {
         'postman-token': 'a1f3bad2-8aab-6d21-7162-d82350e953af',
@@ -257,7 +257,7 @@ app.post('/SignUp', async function (req, res) {
 
     var option = {
       method: 'POST',
-      url: 'https://apistest.tradetipsapp.com/api/appUser/newSignupPayment',
+      url: 'https://apis.tradetipsapp.com/api/appUser/newSignupPayment',
       headers: {
         'postman-token': 'a1f3bad2-8aab-6d21-7162-d82350e953af',
         'cache-control': 'no-cache'
@@ -324,7 +324,7 @@ app.post('/SignUp', async function (req, res) {
 //    //   console.log(req.body);
 
 //         var options = { method: 'POST',
-//             url: 'https://apistest.tradetipsapp.com/api/appUser/newSignupPayment',
+//             url: 'https://apis.tradetipsapp.com/api/appUser/newSignupPayment',
 //             headers: 
 //              { 'postman-token': 'a1f3bad2-8aab-6d21-7162-d82350e953af',
 //                'cache-control': 'no-cache'},

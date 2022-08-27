@@ -73,7 +73,7 @@
             <div class="col-lg-7">
               <form class="form-inline">
                 <input type="text" class="form-control apply-input mr-sm-2" name="text1" id="couponadd"
-                  placeholder="" style="margin-right: 10px" />
+                  placeholder="" style="margin-right: 10px" onkeydown="return (event.keyCode!=13);"/>
                 <button class="btn  apply-btn btn-main btn-blue my-2 my-sm-0" type="button" id="stockadd"
                   onclick="validate(document.getElementsByName('text1')[0].value)">Apply</button>
               </form>
@@ -114,7 +114,7 @@
               <div class="form-group form-row align-items-center ml-0">
                 <label class="col-12" for="exampleInputEmail1">Enter Card Number</label>
                 <input type="text" class="form-control col-md-10 col-12" name="cardNumber" id="cardNumber" placeholder=""
-                  onkeypress="return IsNumeric(event);" ondrop="return false;" onpaste="return false;"
+                  onkeypress="return IsNumeric(event);" ondrop="return false;" onpaste="return false;" tabIndex="1"
                   required="required">
                   <div class="card-img col-2">
                     <img class="img-fluid" src="img/card.svg" alt="img">
@@ -126,12 +126,12 @@
                 <div class="form-group col-md-5 col-6 form-row align-items-center ml-0">
                   <label for="">Exp. Date</label>
                   <input type="text" placeholder="MM/YY" class="form-control" onkeyup="formatString(event);"
-                    name="monthYear" maxlength="5">
+                  tabIndex="2" name="monthYear" maxlength="5">
 
                 </div>
                 <div class="form-group col-md-6 col-6 form-row align-items-center ml-0">
                   <label class="col-12" for="inputZip">CVV</label>
-                  <input type="text" class="form-control col-md-8 col-12" name="cvv" id="cvv" required="required"
+                  <input type="text" class="form-control col-md-8 col-12" name="cvv" id="cvv" required="required" tabIndex="3"
                     maxlength="3" onkeypress="return IsNumerics(event);" ondrop="return false;">
                     <div class="card-img col-md-4 col-2">
                       <img class="img-fluid" src="img/cvv.svg" alt="img">
@@ -141,7 +141,7 @@
               </div>
               <div class="form-group col-md-10 col-12 p-0">
                 <label for="exampleInputPassword1">Enter Cardholder’s Name</label>
-                <input type="text" class="form-control" name="cardName" placeholder="">
+                <input type="text" class="form-control" name="cardName" placeholder="" required="required" tabIndex="4">
               </div>
               <div class="guranted d-flex align-items-center flex-row">
                 <img src="img/lock.svg" alt="lock">
@@ -162,6 +162,21 @@
   integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 
+
+<!-- on press enter  -->
+<script type="text/javascript">
+  $(document).on('keypress', 'input,select', function (e) {
+      if (e.which == 13) {
+          e.preventDefault();
+          var $next = $('[tabIndex=' + (+this.tabIndex + 1) + ']');
+          console.log($next.length);
+          if (!$next.length) {
+         $next = $('[tabIndex=1]');        }
+          $next.focus() .click();
+      }
+  });
+  </script>
+  <!-- ///// -->
 
 
 <script>
@@ -192,14 +207,18 @@
     var keyCode = e.which ? e.which : e.keyCode;
     var ret =
       (keyCode >= 48 && keyCode <= 57) || specialKeys.indexOf(keyCode) != -1;
-    document.getElementById("error").style.display = ret ? "none" : "inline";
+      if(e.which != 13) {
+          document.getElementById("error").style.display = ret ? "none" : "inline"
+      }
     return ret;
   }
   function IsNumerics(e) {
     var keyCode = e.which ? e.which : e.keyCode;
     var ret =
       (keyCode >= 48 && keyCode <= 57) || specialKeys.indexOf(keyCode) != -1;
-    document.getElementById("errors").style.display = ret ? "none" : "inline";
+      if(e.which != 13) {
+          document.getElementById("errors").style.display = ret ? "none" : "inline"
+      }
     return ret;
   }
   function IsNumericpincode(e) {
@@ -265,7 +284,7 @@
   var formdata = { serviceSubscriptionPlanId: subsids };
   $.ajax({
     type: 'POST',
-    url: 'https://apistest.tradetipsapp.com/api/serviceMentorSubscriptionPlanWeb/getServiceSubscriptionPlanById',
+    url: 'https://apis.tradetipsapp.com/api/serviceMentorSubscriptionPlanWeb/getServiceSubscriptionPlanById',
     data: formdata,
     success: function (data) {
       var datak = JSON.stringify(data);
@@ -303,7 +322,7 @@
       if (dataResultp.imageDetails == null) {
         document.getElementById("serviceImage").src = dataResultp.thumbnailImageUrl;
       } else {
-        document.getElementById("serviceImage").src = "https://apistest.tradetipsapp.com" + dataResultp.imageDetails;
+        document.getElementById("serviceImage").src = "https://apis.tradetipsapp.com" + dataResultp.imageDetails;
       }
 
 
@@ -325,7 +344,7 @@
 
     $.ajax({
       type: "POST",
-      url: "https://apistest.tradetipsapp.com/api/stripePayment/validateCoupon",
+      url: "https://apis.tradetipsapp.com/api/stripePayment/validateCoupon",
       data: formdata,
       success: function (data, textStatus, jqXHR) {
         var finalpvals = data.percent_off;
