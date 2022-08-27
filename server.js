@@ -26,8 +26,11 @@ console.log('The magic happens on port ' + port);
 
 app.use(compression());
 app.use(cors());
-app.use(express.bodyParser()); // get information from html forms
-
+// app.use(express.bodyParser()); // get information from html forms
+app.use(bodyParser.urlencoded({
+    extended: true
+}));
+app.use(bodyParser.json());
 
 app.set('view engine', 'ejs'); // set up ejs for templating
 app.use(express.static(path.join(__dirname, 'public')));
