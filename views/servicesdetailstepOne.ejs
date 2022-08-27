@@ -120,7 +120,7 @@
 
                             <div  class="form-group form-row align-items-center ml-0">
                               <label class="col-12" for="exampleInputEmail1">Enter Card Number</label>
-                              <input type="text" class="form-control col-md-10 col-12" name="cardNumber" tabIndex="1" id="cardNumber"  placeholder="" onkeypress="return IsNumeric(event);" ondrop="return false;" onpaste="return false;"
+                              <input type="text" class="form-control col-md-10 col-12" name="cardNumber"  minlength="19"tabIndex="1" id="cardNumber"  placeholder="" onkeypress="return IsNumeric(event);" ondrop="return false;" onpaste="return false;"
                               required="required" autocomplete="section-blue shipping street-address">
                               <div class="card-img col-2">
                                 <img class="img-fluid" src="img/card.svg" alt="img">
@@ -170,7 +170,7 @@
 
   $(document).on('keypress', 'input,select', function (e) {
     if (e.which == 13) {
-      if(textbox.value.length != 19)
+      if(textbox.value.length != 19 || textbox.value.length == 0)
       {
 console.log('not')
       }else{

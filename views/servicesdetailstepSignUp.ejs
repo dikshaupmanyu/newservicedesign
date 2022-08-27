@@ -165,6 +165,7 @@
 
 <!-- on press enter  -->
 <script type="text/javascript">
+    var textbox = document.getElementById("cardNumber");
   $(document).on('keypress', 'input,select', function (e) {
       if (e.which == 13) {
         if(textbox.value.length != 19)
