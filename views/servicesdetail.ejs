@@ -41,7 +41,7 @@
                 <div class="row">
                     <div class="col-lg-6">
                         <div class="signup padd_x20">
-                            <h2 class="form-heading">Sign-up for this Service</h2>
+                            <h2 class="form-heading">Sign up for this Service</h2>
                             <div class="successmsg2" style="text-align: center; margin-bottom: 12px;"> <%= message %></div>
                             <form action="/SignUp" method="POST" >
                               <!-- <input type="text" name="g-recaptcha-response" style="display: none" /> -->
@@ -55,7 +55,8 @@
                                   <input type="email" class="form-control" name="email" id="email" >
                                 </div>
                                 <div class="form-group">
-                                    <label for="exampleInputEmail1">Enter Username</label>
+                                    <label for="exampleInputEmail1">Create Username
+                                    </label>
                                     <input type="text" class="form-control" name="userName" id="uname" >
                                     <!-- <small class="form-text blue-clr">Check availability</small> -->
                                 </div>
@@ -91,7 +92,7 @@
                     </div>
                     <div class="col-lg-6 mt-4 mt-lg-0 seprate-line">
                         <div class="login-form padd_x20">
-                            <h2 class="form-heading">Have a TradeTips Account?  Log in</h2>
+                            <h2 class="form-heading">Have a TradeTips Account?</h2>
                                <div class="successmsg1" style="text-align: center; margin-bottom: 12px;"></div>
                             <form id="formoid" method="post" onsubmit="return false">
                                 <div class="form-group">
@@ -258,7 +259,7 @@ var pasWrdd = $('#pswrds').val();
     if(response.length == 0) 
     { 
       //reCaptcha not verified
-      $(".successmsg2").html('please verify you are humann!');
+      $(".successmsg2").html('Sign up information is not correct.');
       setTimeout(function () { $(".successmsg2").empty() }, 2000);
       // evt.preventDefault();
       return false;
